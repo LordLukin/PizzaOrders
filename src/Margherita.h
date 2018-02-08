@@ -1,10 +1,11 @@
 #pragma once
 #include "Pizza.h"
 
-class Funghi : public Pizza
+class Margherita : public Pizza
 {
+public:
+    Margherita();
 private:
     Ingredient mozzarella;
     Ingredient tomatoSauce;
-    Ingredient mushrooms;
 };

@@ -1,26 +1,11 @@
 sudo: required
 language: cpp
-
-matrix:
-  include:
-    - compiler: g++
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-7
-      env: COMPILER_NAME=gcc CXX=g++-7 CC=gcc-7
-    - compiler: clang
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-precise-3.8
-          packages:
-            - clang-3.8
-      env: COMPILER=clang++-3.8
-
+os:
+  - linux
+  - osx
+compiler:
+  - g++
+  - clang
 script:
   - mkdir build
   - cd build

@@ -6,11 +6,13 @@
 class Pizza
 {
 public:
-    Pizza() = default;
-    ~Pizza() = default;	// should be virtual
+    Pizza(std::string const & name);
+    virtual ~Pizza() = default;
+    std::string getName();
 
 private:
-    std::list<Ingredient> ingredients;
+    std::string name_;
+    std::list<Ingredient> ingredients_;
 };
 
 using Pizzas = std::set<Pizza*>;
