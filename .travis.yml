@@ -1,13 +1,8 @@
 language: cpp
 compiler:
-	- g++
+  - g++
+  - clang
 os:
-	- linux
+  - linux
 script:
-	- mkdir build && cd build && cmake .. && make
-branches:
-	only:
-		- master
-notifications:
-	email:
-	- lukin1000@gmail.com
+  - mkdir build && cd build && cmake .. && make
