@@ -1,7 +1,9 @@
 #pragma once
+#include "Pizzeria.h"
+#include "Pizza.h"
 
 class Pizzeria
 {
 public:
-    void makeOrder(std::set<Pizza*> pizzas) { }
+    void makeOrder(Pizzas pizzas);
 };

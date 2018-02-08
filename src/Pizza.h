@@ -1,5 +1,6 @@
 #pragma once
 #include <list>
+#include <set>
 #include "Ingredient.h"
 
 class Pizza
@@ -11,3 +12,5 @@ public:
 private:
     std::list<Ingredient> ingredients;
 };
+
+using Pizzas = std::set<Pizza*>;
