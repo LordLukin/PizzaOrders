@@ -4,8 +4,8 @@
 class Ingredient
 {
 public:
-	Ingredient() = default;
+    Ingredient() = default;
 
 private:
-	std::string name;
+    std::string name;
 };

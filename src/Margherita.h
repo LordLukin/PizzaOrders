@@ -4,7 +4,7 @@
 class Funghi : public Pizza
 {
 private:
-	Ingredient mozzarella;
-	Ingredient tomatoSauce;
-	Ingredient mushrooms;
+    Ingredient mozzarella;
+    Ingredient tomatoSauce;
+    Ingredient mushrooms;
 };

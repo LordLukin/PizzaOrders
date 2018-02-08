@@ -5,9 +5,9 @@
 class Pizza
 {
 public:
-	Pizza() = default;
-	~Pizza() = default;	// should be virtual
+    Pizza() = default;
+    ~Pizza() = default;	// should be virtual
 
 private:
-	std::list<Ingredient> ingredients;
+    std::list<Ingredient> ingredients;
 };

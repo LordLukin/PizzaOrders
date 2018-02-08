@@ -4,6 +4,6 @@
 class Margherita : public Pizza
 {
 private:
-	Ingredient mozzarella;
-	Ingredient tomatoSauce;
+    Ingredient mozzarella;
+    Ingredient tomatoSauce;
 };
