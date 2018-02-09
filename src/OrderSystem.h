@@ -7,4 +7,5 @@ class OrderSystem
 {
 public:
     void makeOrder(Pizzeria pizzeria, Pizzas pizzas);
+    bool charge(double price);
 };

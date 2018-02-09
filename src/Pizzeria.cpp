@@ -24,3 +24,8 @@ void Pizzeria::makeOrder(Pizzas pizzas)
                   << std::endl;
     }
 }
+
+double Pizzeria::calculatePrice(Pizzas pizzas)
+{
+    return 0.0;
+}

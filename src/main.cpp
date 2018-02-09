@@ -6,16 +6,17 @@
 
 int main()
 {
-    Pizzas pizzas = { new Margherita{}, new Funghi{} };
+    Pizzas pizzas = {new Margherita{}, new Funghi{}};
 
-    // 3 different pizzerias with different interfaces
-    // refactor to facade
-    Pizzeria vesuvio{ "Vesuvio - real Italian pizza" };
+    // To break: 3 different pizzerias with different interfaces. Refactor to facade
+    Pizzeria vesuvio{"Vesuvio - real Italian pizza"};
     Pizzeria bravo{"Bravo - good, because it's cheap"};
+    Pizzeria grubyBenek{"Gruby Benek - Wroclaw's pizza"};
 
-    OrderSystem os;
+    // To break: pizzerias added via add method. Add a constructor
+    OrderSystem os{};
     os.makeOrder(vesuvio, pizzas);
-    os.makeOrder(bravo, pizzas);
+    os.makeOrder(grubyBenek, pizzas);
 
     system("PAUSE");
 }
