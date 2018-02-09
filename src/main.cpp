@@ -6,19 +6,16 @@
 
 int main()
 {
-    Pizza* margherita = new Margherita{};
-    Pizza* funghi = new Funghi{};
-    Pizzas pizzas = { margherita, funghi };
+    Pizzas pizzas = { new Margherita{}, new Funghi{} };
 
-    Pizzeria vesuvio{"Vesuvio - real Italian pizza"};   // 3 different pizzerias with different interfaces
-                                                        // refactor to facade
+    // 3 different pizzerias with different interfaces
+    // refactor to facade
+    Pizzeria vesuvio{ "Vesuvio - real Italian pizza" };
+    Pizzeria bravo{"Bravo - good, because it's cheap"};
 
     OrderSystem os;
     os.makeOrder(vesuvio, pizzas);
+    os.makeOrder(bravo, pizzas);
 
-    delete margherita;
-    delete funghi;
-
-    std::cout << "Hello World!" << std::endl;
     system("PAUSE");
 }

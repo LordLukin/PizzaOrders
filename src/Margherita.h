@@ -5,7 +5,8 @@ class Margherita : public Pizza
 {
 public:
     Margherita();
+
 private:
-    Ingredient mozzarella;
-    Ingredient tomatoSauce;
+    Ingredient mozzarella_;
+    Ingredient tomatoSauce_;
 };
