@@ -1,6 +1,15 @@
 #include "OrderSystem.h"
 #include <iostream>
 
+OrderSystem & OrderSystem::instance()
+{
+    if (!instance_)
+    {
+        instance_ = new OrderSystem{};
+    }
+    return *instance_;
+}
+
 void OrderSystem::makeOrder(Pizzeria pizzeria, Pizzas pizzas)
 {
     if (pizzeria.validateOrder(pizzas))
@@ -31,3 +40,5 @@ bool OrderSystem::charge(double price)
     // refactor to observer pattern
     return true;
 }
+
+OrderSystem* OrderSystem::instance_ = nullptr;

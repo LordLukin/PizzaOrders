@@ -14,7 +14,7 @@ int main()
     Pizzeria grubyBenek{"Gruby Benek - Wroclaw's pizza"};
 
     // To break: pizzerias added via add method. Add a constructor
-    OrderSystem os{};
+    OrderSystem& os = OrderSystem::instance();
     os.makeOrder(vesuvio, pizzas);
     os.makeOrder(grubyBenek, pizzas);
 

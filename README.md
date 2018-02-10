@@ -2,7 +2,7 @@
 
 
 ### Things to break:
-* Singleton in OrderSystem
++ Singleton in OrderSystem
 * Tight coupling of Ingredients from pizza and somewhere else
 * Untestability. Add System Test. Fixing Tight coupling should make code unit testable
 * Premature optimization. Think about it in the end.
