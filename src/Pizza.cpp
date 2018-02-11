@@ -8,3 +8,8 @@ std::string Pizza::getName()
 {
     return name_;
 }
+
+double Pizza::getPrice()
+{
+    return 1.0;
+}

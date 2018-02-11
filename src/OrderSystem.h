@@ -11,7 +11,8 @@ public:
     OrderSystem(OrderSystem const &) = delete;
     OrderSystem& operator=(OrderSystem const &) = delete;
 
-    void makeOrder(Pizzeria pizzeria, Pizzas pizzas);
+    void makeOrder(Pizzeria pizzeria, Pizzas pizzas, std::string deliveryAddress);
+    void printReceipt(double price, Pizzas pizzas);
     bool charge(double price);
 
 private:

@@ -1,5 +1,18 @@
 # PizzaOrders [![Build Status](https://www.travis-ci.org/LordLukin/PizzaOrders.svg?branch=master)](https://www.travis-ci.org/LordLukin/PizzaOrders)
 
+## The story so far...
+You has been hired as a software engineer in TastyPizza company. It's ordering system was written by a student
+and it's suffering severe issues with performance. Moreover it cannot handle multiple users.
+There were also situations that clients paid for an order, but order was lost.
+Unfortunately the author of the system is no longer working here and he is not answering his phone.
+Your task is to improve the system to work with multiple users and make it extansible for futher
+features and improvements. You have only 8 hours.
+
+1. Step 1: Identify as much system vulnerabilities as you can
+2. Step 2: Write some tests
+3. Step 3: Fix problems
+4. Step 4: Refactor the code to be maintenable.
+5. Step 5: Go to step 2
 
 ### Things to break:
 + Singleton in OrderSystem
