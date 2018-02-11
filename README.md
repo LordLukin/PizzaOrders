@@ -28,6 +28,7 @@ features and improvements. You have only 8 hours.
 * Code formatting
 * Get rid of Memory leaks
 * Use STL
+* Keyboard input validation
 
 ### Things to fix:
 * SRP - Order class should be extracted from OrderSystem. Pizzeria should be extracted from OrderSystem? OrderSystem god class?

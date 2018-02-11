@@ -3,7 +3,7 @@
 #include "Pizzeria.h"
 #include "Pizza.h"
 
-class OrderSystem
+class OrderSystem   // God class
 {
 public:
     static OrderSystem& instance();
