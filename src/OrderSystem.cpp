@@ -4,7 +4,6 @@
 #include "CreditCardSystem.h"
 #include <iostream>
 #include <iomanip>
-#include <chrono>
 #include <thread>
 
 OrderSystem & OrderSystem::instance()
@@ -40,7 +39,7 @@ void OrderSystem::makeOrder(Pizzeria pizzeria, Pizzas pizzas, std::string delive
             int orderId = pizzeria.makeOrder(pizzas);
             std::cout << "Your order has id " << orderId << std::endl;
             printReceipt(price, pizzas);
-            // put function body everywhere. Refactor by extracting method
+            // TODO: put function body everywhere. Refactor by extracting method
 
             bool isOrderReady = false;
             do  // REFACTOR: from active polling to observer pattern
@@ -48,7 +47,7 @@ void OrderSystem::makeOrder(Pizzeria pizzeria, Pizzas pizzas, std::string delive
                 isOrderReady = pizzeria.isOrderReady(orderId);
                 std::cout << "Order is not ready yet. Wait for the orderId " << orderId
                           << " to finish" << std::endl;
-                std::this_thread::sleep_for(std::chrono::seconds(8));
+                std::this_thread::sleep_for(minutes(2));
             } while (!isOrderReady);
 
             std::cout << "Your order with id " << orderId << " is ready" << std::endl;
@@ -61,7 +60,7 @@ void OrderSystem::makeOrder(Pizzeria pizzeria, Pizzas pizzas, std::string delive
             {
                 isOrderDelivered = pizzeria.checkDeliveryStatus(deliveryId);
                 std::cout << "Please be patient. Your pizza is on the way." << std::endl;
-                std::this_thread::sleep_for(std::chrono::seconds(8));
+                std::this_thread::sleep_for(minutes(2));
             } while (!isOrderDelivered);
 
             std::cout << "Pizza delivered. Thank you for using our system!" << std::endl;
@@ -81,7 +80,7 @@ void OrderSystem::makeOrder(Pizzeria pizzeria, Pizzas pizzas, std::string delive
 
 bool OrderSystem::charge(double price)
 {
-    auto paymentMethod = 3; // selectPaymentMethod();
+    auto paymentMethod = 3; // TODO: selectPaymentMethod();
     bool success;       // REFACTOR: Unintialized data
     // REFACTOR: to a common base class as an payment interface. Now every system has other interface
     // REFACTOR: Facade + Strategy

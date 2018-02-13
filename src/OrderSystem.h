@@ -1,9 +1,8 @@
 #pragma once
-#include <set>
 #include "Pizzeria.h"
 #include "Pizza.h"
 
-class OrderSystem   // God class
+class OrderSystem   // REFACTOR: God class
 {
 public:
     static OrderSystem& instance();

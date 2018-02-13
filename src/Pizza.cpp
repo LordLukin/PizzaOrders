@@ -1,7 +1,7 @@
 #include "Pizza.h"
 
-Pizza::Pizza(std::string const & name)
-    : name_(name), ingredients_{}
+Pizza::Pizza(std::string const & name, double price, minutes bakingTime)
+    : name_(name), price_(price), bakingTime_(bakingTime), ingredients_{}
 {}
 
 std::string Pizza::getName()
@@ -9,7 +9,17 @@ std::string Pizza::getName()
     return name_;
 }
 
-double Pizza::getPrice()
+void Pizza::addIngreditent(Ingredient ingredient)
 {
-    return 1.0;
+    ingredients_.push_back(ingredient);
+}
+
+double Pizza::getPrice() const
+{
+    return price_;
+}
+
+minutes Pizza::getBakingTime() const
+{
+    return bakingTime_;
 }

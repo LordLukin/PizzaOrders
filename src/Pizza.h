@@ -1,19 +1,25 @@
 #pragma once
 #include <list>
 #include <set>
+#include <chrono>
 #include "Ingredient.h"
+
+using minutes = std::chrono::seconds;   // To simulate time flow ;)
 
 class Pizza
 {
 public:
-    Pizza(std::string const & name);
+    Pizza(std::string const & name, double price, minutes bakingTime);
     virtual ~Pizza() = default;
-    std::string getName();
-    double getPrice();
+    virtual std::string getName();
+    virtual double getPrice() const;
+    virtual minutes getBakingTime() const;
+    void addIngreditent(Ingredient ingredient);
 
 private:
     std::string name_;
-    double price;
+    double price_;
+    minutes bakingTime_;
     std::list<Ingredient> ingredients_;
 };
 

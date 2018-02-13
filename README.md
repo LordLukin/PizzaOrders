@@ -26,6 +26,7 @@ features and improvements. You have only 8 hours.
 * Const correctness (functions and params)
 * RAII (acquire in constructor)
 * Code formatting
+* Variables should always be initialized
 * Get rid of Memory leaks
 * Use STL
 * Keyboard input validation

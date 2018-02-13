@@ -7,5 +7,6 @@ public:
     Ingredient() = default;
 
 private:
-    std::string name;
+    std::string name_;
+    double bakeTime_;
 };

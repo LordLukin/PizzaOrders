@@ -9,11 +9,11 @@ int main()
     Pizzas pizzas = {new Margherita{}, new Funghi{}};
 
     // To break: 3 different pizzerias with different interfaces. Refactor to facade
-    Pizzeria venezia{"Venezia - real Italian pizza"};
-    Pizzeria bravo{"Bravo - good and cheap pizza"};
-    Pizzeria grindtorp{"Grindtorp pizzeria - local pizza"};
+    Pizzeria venezia{"Venezia - real Italian pizza", {new Funghi{}}};
+    Pizzeria bravo{"Bravo - good and cheap pizza", {new Margherita{}}};
+    Pizzeria grindtorp{"Grindtorp pizzeria - local pizza", pizzas};
 
-    std::string deliveryAddress{"Nytorpsvagen 9, 183 03 Taby, Sweden"};
+    std::string deliveryAddress{"Nytorpsvagen 34, 183 03 Taby, Sweden"};
 
     // To break: pizzerias added via add method. Add a constructor
     OrderSystem& os = OrderSystem::instance();
