@@ -1,13 +1,14 @@
 #include <gtest/gtest.h>
+#include "OrderSystem.h"
 
 using namespace std;
 
-class Fixture : public ::testing::Test
+class PizzaOrderTest : public ::testing::Test
 {
 
 };
 
-TEST_F(Fixture, Dummy)
+TEST_F(PizzaOrderTest, createNewInstance)
 {
-    ASSERT_TRUE(false);
+    OrderSystem& os = OrderSystem::instance();
 }
