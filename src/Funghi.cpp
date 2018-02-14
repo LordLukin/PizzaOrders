@@ -1,5 +1,5 @@
 #include "Funghi.h"
 
 Funghi::Funghi()
-    : Pizza("Funghi", 6.0, minutes(4))
+    : Pizza("Funghi", 100.0, minutes(4))
 {}

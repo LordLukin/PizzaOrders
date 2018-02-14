@@ -1,5 +1,5 @@
 #include "Margherita.h"
 
 Margherita::Margherita()
-    : Pizza("Margherita", 5.0, minutes(3))
+    : Pizza("Margherita", 80.0, minutes(3))
 {}

@@ -146,7 +146,7 @@ bool OrderSystem::charge(double price)
     }
     else // payByCash
     {
-        std::cout << "Payment by cash selected. Please prepare " << price << " in cash.";
+        std::cout << "Payment by cash selected. Please prepare " << price << " SEK in cash. " << std::endl;
         success = true;
     }
 
