@@ -17,7 +17,7 @@ features and improvements. You have only 8 hours.
 ### Things to break:
 + Singleton in OrderSystem
 + Tight coupling of Ingredients from Pizza, Pizza from Pizzeria, Pizzeria from OrderSystem
-* Untestability. Add System Test. Fixing Tight coupling should make code unit testable
++ Untestability. Add System Test. Fixing Tight coupling should make code unit testable
 * Premature optimization. Think about it in the end.
 * Indescriptive Naming. Introduce in the end.
 * Duplication in pizzas and pizzerias.

@@ -27,7 +27,7 @@ public:
     OrderSystem(OrderSystem const &) = delete;
     OrderSystem& operator=(OrderSystem const &) = delete;
 
-    void makeOrder(Pizzas pizzas, std::string deliveryAddress);
+    bool makeOrder(Pizzas pizzas, std::string deliveryAddress);
     void selectPizzeria(Pizzerias p);
     void printReceipt(double price, Pizzas pizzas);     // REFACTOR: should be private
     bool charge(double price);                          // REFACTOR: should be private

@@ -43,7 +43,7 @@ void OrderSystem::printReceipt(double price, Pizzas pizzas)
     std::cout << " TOTAL: " << price << std::endl;
 }
 
-void OrderSystem::makeOrder(Pizzas pizzas, std::string deliveryAddress)
+bool OrderSystem::makeOrder(Pizzas pizzas, std::string deliveryAddress)
 {
     if (selected_->validateOrder(pizzas))
     {
@@ -79,10 +79,12 @@ void OrderSystem::makeOrder(Pizzas pizzas, std::string deliveryAddress)
             } while (!isOrderDelivered);
 
             std::cout << "Pizza delivered. Thank you for using our system!" << std::endl;
+            return true;
         }
         else
         {
             std::cout << "Payment unsuccessful. Order cancelled." << std::endl;
+            return false;
         }
     }
     else
@@ -90,6 +92,7 @@ void OrderSystem::makeOrder(Pizzas pizzas, std::string deliveryAddress)
         std::cout << "At least one of selected pizza is not available in "
                   << selected_->getName()
                   << std::endl;
+        return false;
     }
 }
 
