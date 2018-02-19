@@ -31,18 +31,6 @@ void OrderSystem::selectPizzeria(Pizzerias p)
     }
 }
 
-void OrderSystem::printReceipt(double price, Pizzas pizzas)
-{
-    std::cout << "---- RECEIPT ----" << std::endl;
-    for (auto pizza : pizzas)
-    {
-        std::cout << std::fixed << std::right << std::setprecision(2);
-        std::cout << " " << pizza->getName() << " " << pizza->getPrice() << std::endl;
-    }
-    std::cout << "-----------------" << std::endl;
-    std::cout << " TOTAL: " << price << std::endl;
-}
-
 bool OrderSystem::makeOrder(Pizzas pizzas, std::string deliveryAddress)
 {
     if (selected_->validateOrder(pizzas))
@@ -53,8 +41,15 @@ bool OrderSystem::makeOrder(Pizzas pizzas, std::string deliveryAddress)
         {
             int orderId = selected_->makeOrder(pizzas);
             std::cout << "Your order has id " << orderId << std::endl;
-            printReceipt(price, pizzas);
-            // TODO: put function body everywhere. Refactor by extracting method
+
+            std::cout << "---- RECEIPT ----" << std::endl;
+            for (auto pizza : pizzas)
+            {
+                std::cout << std::fixed << std::right << std::setprecision(2);
+                std::cout << " " << pizza->getName() << " " << pizza->getPrice() << std::endl;
+            }
+            std::cout << "-----------------" << std::endl;
+            std::cout << " TOTAL: " << price << std::endl;
 
             bool isOrderReady = false;
             do  // REFACTOR: from active polling to observer pattern

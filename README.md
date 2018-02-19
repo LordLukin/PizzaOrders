@@ -20,7 +20,7 @@ features and improvements. You have only 8 hours.
 + Untestability. Add System Test. Fixing Tight coupling should make code unit testable
 * Premature optimization. Think about it in the end.
 * Indescriptive Naming. Introduce in the end.
-* Duplication in pizzas and pizzerias.
++ Duplication in pizzerias in OrderSystem.
 
 ### Things to fix:
 * SRP - Order class should be extracted from OrderSystem. Pizzeria should be extracted from OrderSystem? OrderSystem god class?
@@ -46,7 +46,7 @@ features and improvements. You have only 8 hours.
 3. Move implementation from header to cpp files (CreditCardSystem.h, DotPay.h,
 3. Remove the dead code from Ingredient
 4. Write Unit tests for 1 class, refactor class, repeat for another ones
-5. Remove coupling (DIP)
+5. Remove a coupling (DIP)
 
 
 ### General coding rules:
