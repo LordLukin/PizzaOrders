@@ -6,16 +6,12 @@
 
 int main()
 {
-    Pizzas pizzas = {new Margherita{}, new Funghi{}};
-
-    // To break: 3 different pizzerias with different interfaces. Refactor to facade
-    Pizzeria venezia{"Venezia - real Italian pizza", {new Funghi{}}};
-    Pizzeria bravo{"Bravo - good and cheap pizza", {new Margherita{}}};
-    Pizzeria grindtorp{"Grindtorp pizzeria - local pizza", pizzas};
-
-    std::string deliveryAddress{"Nytorpsvagen 9, 183 53 Taby, Sweden"};
-
-    // To break: pizzerias added via add method. Add a constructor
     OrderSystem& os = OrderSystem::instance();
-    os.makeOrder(grindtorp, pizzas, deliveryAddress);
+
+    os.selectPizzeria(GRINDTORP);
+    os.selectPaymentMethod(CASH);
+    // REFACTOR: Where is price validation? In grindtorp Margherita costs 90.0
+    Pizzas pizzas = {new Margherita{80.0}, new Funghi{110.0}};
+    std::string deliveryAddress{"Nytorpsvagen 9, 183 53 Taby, Sweden"};
+    os.makeOrder(pizzas, deliveryAddress);
 }

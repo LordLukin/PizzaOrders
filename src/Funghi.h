@@ -4,7 +4,8 @@
 class Funghi : public Pizza
 {
 public:
-    Funghi();
+    Funghi() = delete;
+    Funghi(double price);
 
 private:
     Ingredient mozzarella_;

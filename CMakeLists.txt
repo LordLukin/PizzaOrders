@@ -42,10 +42,10 @@ project(PizzaOrders)
 set(SRC_LIST
     src/Funghi.cpp
     src/Ingredient.cpp
-	src/Margherita.cpp
-	src/OrderSystem.cpp
-	src/Pizza.cpp
-	src/Pizzeria.cpp
+    src/Margherita.cpp
+    src/OrderSystem.cpp
+    src/Pizza.cpp
+    src/Pizzeria.cpp
 )
 
 include_directories(src)
@@ -55,13 +55,13 @@ target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
 if (UNIX)
     target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib pthread)
 else (UNIX)
-	target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
+    target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
 endif (UNIX)
 
 
 set(TEST_SRC_LIST
-	test/PizzaOrderTest.cpp
-	test/test_main.cpp
+    test/PizzaOrderTest.cpp
+    test/test_main.cpp
 )
 
 link_libraries(gtest)

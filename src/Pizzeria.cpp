@@ -20,7 +20,7 @@ bool Pizzeria::validateOrder(Pizzas pizzas)
         bool isAvailable = false;
         for (auto availablePizza : availablePizzas_)
         {
-            if (pizza == availablePizza)
+            if (pizza->getName() == availablePizza->getName())
             {
                 isAvailable = true;
             }

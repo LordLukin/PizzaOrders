@@ -14,8 +14,8 @@ public:
     Pizzeria(std::string const & name, Pizzas availablePizzas);  // REFACTOR const &
     // REFACTOR: Tight coupling - need to create set of pizzas before creating a pizzeria
     std::string getName();
-    int makeOrder(Pizzas pizzas);       // To fix: const argument
-    bool validateOrder(Pizzas pizzas);  // To fix: const function
+    int makeOrder(Pizzas pizzas);       // REFACTOR const argument
+    bool validateOrder(Pizzas pizzas);  // REFACTOR: const function
     double calculatePrice(Pizzas pizzas);
     int setDeliveryAddress(int orderId, std::string deliveryAddress);
     bool checkDeliveryStatus(int deliveryId);

@@ -22,29 +22,38 @@ features and improvements. You have only 8 hours.
 * Indescriptive Naming. Introduce in the end.
 * Duplication in pizzas and pizzerias.
 
-### General coding rules:
-* Const correctness (functions and params)
-* RAII (acquire in constructor)
-* Code formatting
-* Variables should always be initialized
-* Get rid of Memory leaks
-* Use STL
-* Keyboard input validation
-
 ### Things to fix:
 * SRP - Order class should be extracted from OrderSystem. Pizzeria should be extracted from OrderSystem? OrderSystem god class?
 * OCP - Remove Tight Coupling. Create Pizza base class, to easily add new pizzas and not operate on existing ones.
 * LSP - 
 * ISP - 
-* DIR - 
+* DIP -
 
 ### Design Patterns to apply:
 * Decorator - for adding more ingredients and/or sauce to pizza and calculating price
-* Facade - pizzerias have different interaces. They should be hidden in facade.
+* Facade - payment systems have different interaces. They should be hidden in facade.
 * Observer - for asynchronous call of makePayment or charge function?
 * Strategy - inside Facade - if pizzeria == 1, do this, pizzeria2 do that, etc.
 
 ### Design Antipatterns:
-* God class - OrderSystem to split
-* Dead code - put it somewhere
-* Copy & Paste - Pizzas to remove duplication
+* God class - OrderSystem
+* Dead code - Ingredient
+* Copy & Paste - OrderSystem
+
+### Code refactoring:
+1. Formatting - clang-format, qtCreator. Egyptian braces, Allman braces, spaces vs tabs
+2. Naming convention - lowerCamelCase, UpperCamelCase, snake_case?
+3. Move implementation from header to cpp files (CreditCardSystem.h, DotPay.h,
+3. Remove the dead code from Ingredient
+4. Write Unit tests for 1 class, refactor class, repeat for another ones
+5. Remove coupling (DIP)
+
+
+### General coding rules:
+* Goal: no comments at all (at least those describing the code). Code should be self-documenting.
+* Const correctness (functions and params)
+* RAII (acquire in constructor)
+* Variables should always be initialized
+* Get rid of Memory leaks
+* Use STL
+* Additionaly, if time allows: keyboard input validation (use of exceptions?)

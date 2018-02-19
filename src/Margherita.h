@@ -4,7 +4,8 @@
 class Margherita : public Pizza
 {
 public:
-    Margherita();
+    Margherita() = delete;
+    Margherita(double price);
 
 private:
     Ingredient mozzarella_;

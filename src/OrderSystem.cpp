@@ -15,12 +15,27 @@ OrderSystem & OrderSystem::instance()
     return *instance_;
 }
 
+void OrderSystem::selectPizzeria(Pizzerias p)
+{
+    switch (p)
+    {
+    case VENEZIA:
+        selected_ = &venezia_;
+        break;
+    case BRAVO:
+        selected_ = &bravo_;
+        break;
+    case GRINDTORP:
+        selected_ = &grindtorp_;
+        break;
+    }
+}
+
 void OrderSystem::printReceipt(double price, Pizzas pizzas)
 {
     std::cout << "---- RECEIPT ----" << std::endl;
     for (auto pizza : pizzas)
     {
-        // TODO: format output
         std::cout << std::fixed << std::right << std::setprecision(2);
         std::cout << " " << pizza->getName() << " " << pizza->getPrice() << std::endl;
     }
@@ -28,15 +43,15 @@ void OrderSystem::printReceipt(double price, Pizzas pizzas)
     std::cout << " TOTAL: " << price << std::endl;
 }
 
-void OrderSystem::makeOrder(Pizzeria pizzeria, Pizzas pizzas, std::string deliveryAddress)
+void OrderSystem::makeOrder(Pizzas pizzas, std::string deliveryAddress)
 {
-    if (pizzeria.validateOrder(pizzas))
+    if (selected_->validateOrder(pizzas))
     {
-        auto price = pizzeria.calculatePrice(pizzas);
+        auto price = selected_->calculatePrice(pizzas);
         std::cout << "You need to pay " << price << " SEK." << std::endl;
         if (charge(price))
         {
-            int orderId = pizzeria.makeOrder(pizzas);
+            int orderId = selected_->makeOrder(pizzas);
             std::cout << "Your order has id " << orderId << std::endl;
             printReceipt(price, pizzas);
             // TODO: put function body everywhere. Refactor by extracting method
@@ -44,7 +59,7 @@ void OrderSystem::makeOrder(Pizzeria pizzeria, Pizzas pizzas, std::string delive
             bool isOrderReady = false;
             do  // REFACTOR: from active polling to observer pattern
             {
-                isOrderReady = pizzeria.isOrderReady(orderId);
+                isOrderReady = selected_->isOrderReady(orderId);
                 std::cout << "Order is not ready yet. Wait for the orderId " << orderId
                           << " to finish" << std::endl;
                 std::this_thread::sleep_for(minutes(2));
@@ -52,13 +67,13 @@ void OrderSystem::makeOrder(Pizzeria pizzeria, Pizzas pizzas, std::string delive
 
             std::cout << "Your order with id " << orderId << " is ready" << std::endl;
 
-            auto deliveryId = pizzeria.setDeliveryAddress(orderId, deliveryAddress);
+            auto deliveryId = selected_->setDeliveryAddress(orderId, deliveryAddress);
             std::cout << "Expect delivery soon to " << deliveryAddress << std::endl;
 
             bool isOrderDelivered = false;
             do
             {
-                isOrderDelivered = pizzeria.checkDeliveryStatus(deliveryId);
+                isOrderDelivered = selected_->checkDeliveryStatus(deliveryId);
                 std::cout << "Please be patient. Your pizza is on the way." << std::endl;
                 std::this_thread::sleep_for(minutes(2));
             } while (!isOrderDelivered);
@@ -73,19 +88,30 @@ void OrderSystem::makeOrder(Pizzeria pizzeria, Pizzas pizzas, std::string delive
     else
     {
         std::cout << "At least one of selected pizza is not available in "
-                  << pizzeria.getName()
+                  << selected_->getName()
                   << std::endl;
     }
 }
 
+void OrderSystem::selectPaymentMethod(PaymentMethod pm)
+{
+    if (pm == PAY_PAL)
+        paymentMethod_ = 0;
+    else if (pm == CREDIT_CARD)
+        paymentMethod_ = 2;
+    else if (pm == DOTPAY)
+        paymentMethod_ = 1;
+    else
+        paymentMethod_ =  3;
+}
+
 bool OrderSystem::charge(double price)
 {
-    auto paymentMethod = 3; // TODO: selectPaymentMethod();
-    bool success;       // REFACTOR: Unintialized data
-    // REFACTOR: to a common base class as an payment interface. Now every system has other interface
+    bool success;           // REFACTOR: Unintialized data
+    // REFACTOR: to a common base class as a payment interface. Now every system has another interface
     // REFACTOR: Facade + Strategy
     // REFACTOR: Add enum for payment method
-    if (paymentMethod == 0)  // PayPal
+    if (paymentMethod_ == 0)  // PayPal
     {
         PayPal pp;
         std::string username;
@@ -95,10 +121,10 @@ bool OrderSystem::charge(double price)
         std::cin >> username;
         std::cout << "Password: ";
         std::cin >> password;
-        pp.login(username, password);   // REFACTOR: Return value checking!
+        pp.login(username, password);   // REFACTOR: Return value checking! Was login successful?
         success = pp.pay(price);
     }
-    else if (paymentMethod == 1) // dotpay
+    else if (paymentMethod_ == 1) // dotpay
     {
         std::cout << "DotPay payment was chosen" << std::endl;
         DotPay dp;
@@ -114,7 +140,7 @@ bool OrderSystem::charge(double price)
         } while (!valid && timer < 300);
         success = valid;
     }
-    else if (paymentMethod == 2) // CreditCard
+    else if (paymentMethod_ == 2) // CreditCard
     {
         CreditCardSystem ccs;
         std::string cardNumber;
