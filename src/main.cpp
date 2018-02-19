@@ -13,11 +13,9 @@ int main()
     Pizzeria bravo{"Bravo - good and cheap pizza", {new Margherita{}}};
     Pizzeria grindtorp{"Grindtorp pizzeria - local pizza", pizzas};
 
-    std::string deliveryAddress{"Nytorpsvagen 34, 183 03 Taby, Sweden"};
+    std::string deliveryAddress{"Nytorpsvagen 9, 183 53 Taby, Sweden"};
 
     // To break: pizzerias added via add method. Add a constructor
     OrderSystem& os = OrderSystem::instance();
     os.makeOrder(grindtorp, pizzas, deliveryAddress);
-
-    system("PAUSE");
 }

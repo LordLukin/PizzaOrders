@@ -5,7 +5,6 @@ int main(int argc, char** argv)
     try {
         testing::InitGoogleTest(&argc, argv);
         auto code = RUN_ALL_TESTS();
-        system("PAUSE");
         return code;
     }
     catch (...)
