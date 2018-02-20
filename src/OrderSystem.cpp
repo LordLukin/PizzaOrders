@@ -107,8 +107,7 @@ bool OrderSystem::charge(double price)
 {
     bool success;           // REFACTOR: Unintialized data
     // REFACTOR: to a common base class as a payment interface. Now every system has another interface
-    // REFACTOR: Facade + Strategy
-    // REFACTOR: Add enum for payment method
+    // REFACTOR: Strategy pattern. Right now this function is a Facade pattern
     if (paymentMethod_ == 0)  // PayPal
     {
         PayPal pp;
