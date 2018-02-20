@@ -11,7 +11,7 @@ enum Pizzerias
     GRINDTORP
 };
 
-enum PaymentMethod    // REFACTOR: Enum class is safer
+enum PaymentMethod    // TODO: Enum class is safer
 {
     PAY_PAL,
     CREDIT_CARD,
@@ -19,7 +19,7 @@ enum PaymentMethod    // REFACTOR: Enum class is safer
     CASH
 };
 
-class OrderSystem   // REFACTOR: God class
+class OrderSystem   // TODO: God class
 {
 public:
     static OrderSystem& instance();
@@ -29,7 +29,7 @@ public:
 
     bool makeOrder(Pizzas pizzas, std::string deliveryAddress);
     void selectPizzeria(Pizzerias p);
-    bool charge(double price);                          // REFACTOR: should be private
+    bool charge(double price);                          // TODO: should be private
     void selectPaymentMethod(PaymentMethod pm);
 
 private:
@@ -38,10 +38,10 @@ private:
 
 
     static OrderSystem* instance_;
-    Pizzeria* selected_;  // REFACTOR: not initialized
-    int paymentMethod_;   // REFACTOR: not initialized
+    Pizzeria* selected_;  // TODO: not initialized
+    int paymentMethod_;   // TODO: not initialized
 
-    // REFACTOR: pizzerias should be added via constructor, which is not available now
+    // TODO: pizzerias should be added via constructor, which is not available now
     // They are tightly couple right now. They should be kept in a collection
     // Additionaly, if time allows: methods for adding/removing pizzerias in runtime are missing
     Pizzeria venezia_{"Venezia - real Italian pizza", {new Funghi{100.0}}};

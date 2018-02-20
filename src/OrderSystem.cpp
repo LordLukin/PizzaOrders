@@ -52,7 +52,7 @@ bool OrderSystem::makeOrder(Pizzas pizzas, std::string deliveryAddress)
             std::cout << " TOTAL: " << price << std::endl;
 
             bool isOrderReady = false;
-            do  // REFACTOR: from active polling to observer pattern
+            do  // TODO: from active polling to observer pattern
             {
                 isOrderReady = selected_->isOrderReady(orderId);
                 std::cout << "Order is not ready yet. Wait for the orderId " << orderId
@@ -105,9 +105,9 @@ void OrderSystem::selectPaymentMethod(PaymentMethod pm)
 
 bool OrderSystem::charge(double price)
 {
-    bool success;           // REFACTOR: Unintialized data
-    // REFACTOR: to a common base class as a payment interface. Now every system has another interface
-    // REFACTOR: Strategy pattern. Right now this function is a Facade pattern
+    bool success;           // TODO: Unintialized data
+    // TODO: to a common base class as a payment interface. Now every system has another interface
+    // TODO: Strategy pattern. Right now this function is a Facade pattern
     if (paymentMethod_ == 0)  // PayPal
     {
         PayPal pp;
@@ -118,7 +118,7 @@ bool OrderSystem::charge(double price)
         std::cin >> username;
         std::cout << "Password: ";
         std::cin >> password;
-        pp.login(username, password);   // REFACTOR: Return value checking! Was login successful?
+        pp.login(username, password);   // TODO: Return value checking! Was login successful?
         success = pp.pay(price);
     }
     else if (paymentMethod_ == 1) // dotpay
@@ -128,7 +128,7 @@ bool OrderSystem::charge(double price)
         int timer = 0;
         bool valid;
         std::cout << "Waiting for confirmation from online system" << std::endl;
-        do  // REFACTOR: observer pattern
+        do  // TODO: observer pattern
         {
             std::chrono::seconds waitTime(1);
             std::this_thread::sleep_for(waitTime);

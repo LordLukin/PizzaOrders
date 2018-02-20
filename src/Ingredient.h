@@ -6,7 +6,7 @@ class Ingredient
 public:
     Ingredient() = default;
 
-    // REFACTOR: Dead code
+    // TODO: Dead code
 private:
     std::string name_;
     double bakeTime_;
