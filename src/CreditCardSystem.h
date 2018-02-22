@@ -4,7 +4,7 @@
 class CreditCardSystem
 {
 public:
-    bool enterData(std::string cardNumber, std::string owner, int monthValid, int yearValid, int ccv)
+   static bool enterData(std::string cardNumber, std::string owner, int monthValid, int yearValid, int ccv)
     {
         // TODO: to return ccv != 0;
         // Stupid simulation of checking if credit card data is valid
@@ -17,7 +17,9 @@ public:
             return true;
         }
     }
-    bool charge(double price)
+
+
+   static bool charge(double price)
     {
         if (price <= 100.0)
         {

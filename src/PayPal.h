@@ -5,11 +5,11 @@
 class PayPal
 {
 public:
-    int login(std::string username, std::string password)
+    static int login(std::string username, std::string password)
     {
         std::hash<std::string> h;
         auto sessionId = h(username + password);
         return sessionId;
     }
-    bool pay(double price) { return true; }
+    static bool pay(double price) { return true; }
 };

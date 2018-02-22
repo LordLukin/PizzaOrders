@@ -5,7 +5,7 @@
 class DotPay
 {
 public:
-    bool sslPaymentReditect(double price)
+    static bool sslPaymentReditect(double price)
     {
         std::future<bool> ret = std::async([]()
         {
