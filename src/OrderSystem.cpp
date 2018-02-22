@@ -29,7 +29,7 @@ bool OrderSystem::makeOrder(Pizzas pizzas, std::string deliveryAddress)
             for (auto pizza : pizzas)
             {
                 std::cout << std::fixed << std::right << std::setprecision(2);
-                std::cout << " " << pizza->getName() << " " << pizza->getPrice() << std::endl;
+                std::cout << " " << pizza->toString() << " " << pizza->getPrice() << std::endl;
             }
             std::cout << "-----------------" << std::endl;
             std::cout << " TOTAL: " << price << std::endl;

@@ -1,8 +1,6 @@
 #pragma once
 #include "Pizzeria.h"
 #include "Pizza.h"
-#include "Margherita.h"
-#include "Funghi.h"
 #include "IPayment.hpp"
 #include <memory>
 #include <Cash.h>

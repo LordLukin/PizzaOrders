@@ -20,7 +20,7 @@ bool Pizzeria::validateOrder(Pizzas pizzas)
         bool isAvailable = false;
         for (auto availablePizza : availablePizzas_)
         {
-            if (pizza->getName() == availablePizza->getName())
+            if (pizza->toString() == availablePizza->toString())
             {
                 isAvailable = true;
             }
@@ -38,7 +38,7 @@ int Pizzeria::makeOrder(Pizzas pizzas)  // TODO: it should take deliveryAddress
     for (auto const & pizza : pizzas)
     {
         std::cout << "Pizzeria " << name_
-                  << ". Making a pizza: " << pizza->getName()
+                  << ". Making a pizza: " << pizza->toString()
                   << std::endl;
     }
     int orderId = rand() % 100;  // TODO: Silly orderId function. Collision possible

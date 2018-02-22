@@ -40,8 +40,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(PizzaOrders)
 
 set(SRC_LIST
-    src/Funghi.cpp
-    src/Margherita.cpp
     src/OrderSystem.cpp
     src/Pizza.cpp
     src/Pizzeria.cpp

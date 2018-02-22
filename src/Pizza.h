@@ -1,24 +1,33 @@
 #pragma once
 #include <list>
 #include <set>
-#include <chrono>
 #include <string>
+#include "IPizza.h"
 
-using minutes = std::chrono::seconds;   // To simulate time flow ;)
+ // To simulate time flow ;)
 
-class Pizza
+class Pizza : public IPizza
 {
 public:
-    Pizza(std::string const & name, double price, minutes bakingTime);
+    Pizza() = default;
+
     ~Pizza() = default;             // TODO: Non virtual destructor! Possible memory leaks
-    virtual std::string getName();  // TODO: const correctnest
-    virtual double getPrice() const;
-    virtual minutes getBakingTime() const;
+    std::string toString() const override
+    {
+        return "Pizza";
+    }
+    double getPrice() const override
+    {
+        return 50.0;
+    }
+    minutes getBakingTime() const override
+    {
+        return minutes(2);
+    }
 
 private:
-    std::string name_;
-    double price_;
-    minutes bakingTime_;
+
+
 };
 
-using Pizzas = std::set<Pizza*>;
+using Pizzas = std::set<IPizza*>;

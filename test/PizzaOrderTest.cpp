@@ -4,6 +4,11 @@
 #include "DotPay.h"
 #include "CreditCardSystem.h"
 #include "PayPal.h"
+#include "Pizza.h"
+#include "IPizza.h"
+#include "Mozzarella.h"
+#include "Mushrooms.h"
+#include "Ham.h"
 
 
 using namespace std;
@@ -13,9 +18,9 @@ class PizzaOrderTest : public ::testing::Test
 public:
     void SetUp() override
     {
-        pizzerias_.insert(std::make_pair(PizzeriaKey::VENEZIA, Pizzeria{"Venezia - real Italian pizza", {new Funghi{100.0}}}));
-        pizzerias_.insert(std::make_pair(PizzeriaKey::BRAVO, Pizzeria{"Bravo - good and cheap pizza", {new Margherita{80.0}}}));
-        pizzerias_.insert(std::make_pair(PizzeriaKey::GRINDTORP, Pizzeria{"Grindtorp pizzeria - local pizza", {new Margherita{90.0}, new Funghi{110.0}}}));
+        pizzerias_.insert(std::make_pair(PizzeriaKey::VENEZIA, Pizzeria{"Venezia - real Italian pizza", {new Pizza{}}}));
+        pizzerias_.insert(std::make_pair(PizzeriaKey::BRAVO, Pizzeria{"Bravo - good and cheap pizza", {new Pizza{}}}));
+        pizzerias_.insert(std::make_pair(PizzeriaKey::GRINDTORP, Pizzeria{"Grindtorp pizzeria - local pizza", {new Pizza{}}}));
     }
 
     std::map<PizzeriaKey, Pizzeria> pizzerias_;
@@ -50,12 +55,56 @@ TEST_F(PizzaOrderTest, makeOrderInBravo)
 {
     OrderSystem os(pizzerias_);
     os.selectPizzeria(PizzeriaKey::BRAVO);
-    ASSERT_TRUE(os.makeOrder({new Margherita{100.0}}, "some address"));
+    ASSERT_TRUE(os.makeOrder({new Pizza{}}, "some address"));
 }
 
 TEST_F(PizzaOrderTest, makeOrderWithNotAvailablePizza)
 {
     OrderSystem os(pizzerias_);
     os.selectPizzeria(PizzeriaKey::BRAVO);
-    ASSERT_FALSE(os.makeOrder({new Funghi{100.0}}, "some address"));
+    Pizza p;
+    Mozzarella m(&p);
+    ASSERT_FALSE(os.makeOrder({&m, &m}, "some address"));
+}
+
+TEST_F(PizzaOrderTest, makeBasePizza)
+{
+    Pizza p;
+//    std::cout << "Bake time, pizza" << p.getBakingTime();
+    std::cout << p.toString() << std::endl;
+    std::cout << "Price, pizza: " << p.getPrice() << std::endl;
+}
+
+TEST_F(PizzaOrderTest, makeMozzarellaPizza)
+{
+    Pizza p;
+    Mozzarella m(&p);
+    std::cout << m.toString() << std::endl;
+    std::cout << "Price, mozzarella pizza: " << m.getPrice() << std::endl;
+}
+
+TEST_F(PizzaOrderTest, makeSuperPizza)
+{
+    Pizza p;
+    Mozzarella m(&p);
+    Ham h(&m);
+    Mushrooms mushrooms(&h);
+    std::cout << mushrooms.toString() << std::endl;
+    std::cout << "Price, super pizza: " << mushrooms.getPrice() << std::endl;
+}
+
+TEST_F(PizzaOrderTest, makeCapricosaPizza)
+{
+    Pizza p;
+    Mozzarella m(&p);
+    Ham h(&m);
+    Mushrooms mushrooms(&h);
+
+    using Capricosa = Mushrooms{Ham{Mozzarella{Pizza{}}}};
+
+    Capricosa c;
+    c.getPrice();
+
+    std::cout << mushrooms.toString() << std::endl;
+    std::cout << "Price, super pizza: " << mushrooms.getPrice() << std::endl;
 }
