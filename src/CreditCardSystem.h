@@ -1,7 +1,8 @@
 #pragma once
 #include <string>
+#include "IPayment.hpp"
 
-class CreditCardSystem
+class CreditCardSystem : public IPayment
 {
 public:
     bool charge(double price)
