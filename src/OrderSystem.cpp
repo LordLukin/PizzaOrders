@@ -31,7 +31,7 @@ bool OrderSystem::makeOrder(const PaymentStrategy & payment, Pizzas pizzas, std:
         std::cout << "You need to pay " << price << " SEK." << std::endl;
         if (charge(price, payment))
         {
-            int orderId = selected_->makeOrder(pizzas);
+            int orderId = selected_->makeOrder(pizzas, deliveryAddress);
             std::cout << "Your order has id " << orderId << std::endl;
 
             std::cout << "---- RECEIPT ----" << std::endl;
@@ -54,13 +54,13 @@ bool OrderSystem::makeOrder(const PaymentStrategy & payment, Pizzas pizzas, std:
 
             std::cout << "Your order with id " << orderId << " is ready" << std::endl;
 
-            auto deliveryId = selected_->setDeliveryAddress(orderId, deliveryAddress);
+            //auto deliveryId = selected_->setDeliveryAddress(orderId, deliveryAddress);
             std::cout << "Expect delivery soon to " << deliveryAddress << std::endl;
 
             bool isOrderDelivered = false;
             do
             {
-                isOrderDelivered = selected_->checkDeliveryStatus(deliveryId);
+                isOrderDelivered = selected_->checkDeliveryStatus(orderId);
                 std::cout << "Please be patient. Your pizza is on the way." << std::endl;
                 std::this_thread::sleep_for(minutes(2));
             } while (!isOrderDelivered);

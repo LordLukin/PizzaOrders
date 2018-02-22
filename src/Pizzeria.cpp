@@ -1,5 +1,6 @@
 #include "Pizzeria.h"
 #include <iostream>
+#include<algorithm>
 
 Pizzeria::Pizzeria(std::string const & name, const Pizzas &availablePizzas)
     : name_(name)
@@ -12,7 +13,7 @@ std::string Pizzeria::getName()
     return name_;
 }
 
-bool Pizzeria::validateOrder(Pizzas pizzas)
+bool Pizzeria::validateOrder(const Pizzas& pizzas)
 {
     // TODO: whole alghoritm is std::includes
     for (auto pizza : pizzas) // TODO: const &
@@ -33,7 +34,7 @@ bool Pizzeria::validateOrder(Pizzas pizzas)
     return true;
 }
 
-int Pizzeria::makeOrder(Pizzas pizzas)  // TODO: it should take deliveryAddress
+int Pizzeria::makeOrder(const Pizzas& pizzas, const std::string& deliveryAddress)  // TODO: it should take deliveryAddress
 {
     for (auto const & pizza : pizzas)
     {
@@ -42,44 +43,21 @@ int Pizzeria::makeOrder(Pizzas pizzas)  // TODO: it should take deliveryAddress
                   << std::endl;
     }
     int orderId = rand() % 100;  // TODO: Silly orderId function. Collision possible
-    orders_.push_back(std::make_tuple(orderId, pizzas, std::chrono::system_clock::now(), "", 0));
+    orders_.push_back(std::make_tuple(orderId, pizzas, std::chrono::system_clock::now(), deliveryAddress, 0));
     return orderId;
 }
 
-double Pizzeria::calculatePrice(Pizzas pizzas)
+double Pizzeria::calculatePrice(const Pizzas& pizzas)
 {
-    // TODO: std::accumulate
-    double sum = 0.0;
-    for (const auto & pizza : pizzas)
-    {
-        sum += pizza.getPrice();
-    }
-    return sum;
+    return std::accumulate(pizzas.begin(), pizzas.end(), 0.0,
+                    [](double lhs, const Pizza& rhs){return lhs + rhs.getPrice();});
 }
 
-int Pizzeria::setDeliveryAddress(int orderId, std::string deliveryAddress)
-{
-    int deliveryId;  // TODO: Not initialized
-    for (auto & order : orders_)
-    {
-        if (std::get<0>(order) == orderId)
-        {
-            std::get<3>(order) = deliveryAddress;
-            // TODO: deliveryId is not needed. OrderId should be enough
-            deliveryId = rand() % 100;  // TODO: Silly algorithm. Collision possible
-            std::get<4>(order) = deliveryId;
-            std::cout << "Delivery address set to " << std::get<3>(order)
-                      << ". DeliveryId = " << std::get<4>(order) << std::endl;
-        }
-    }
-    return deliveryId;
-}
-
-bool Pizzeria::checkDeliveryStatus(int deliveryId)
+bool Pizzeria::checkDeliveryStatus(int orderId)
 {
     for (auto order : orders_)
     {
-        if (std::get<4>(order) == deliveryId)
+        if (std::get<0>(order) == orderId)
         {
             auto now = std::chrono::system_clock::now();
             if ((now - std::get<2>(order)) > minutes(7))

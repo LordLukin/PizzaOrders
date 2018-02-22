@@ -21,11 +21,11 @@ public:
     ~Pizzeria() = default;
 
     std::string getName();
-    int makeOrder(Pizzas pizzas);       // TODO: const argument
-    bool validateOrder(Pizzas pizzas);  // TODO: const function
-    double calculatePrice(Pizzas pizzas);
-    int setDeliveryAddress(int orderId, std::string deliveryAddress);
-    bool checkDeliveryStatus(int deliveryId);
+    int makeOrder(const Pizzas& pizzas, const std::string& deliveryAddress);       // TODO: const argument
+    bool validateOrder(const Pizzas& pizzas);  // TODO: const function
+    double calculatePrice(const Pizzas& pizzas);
+    //int setDeliveryAddress(int orderId, std::string deliveryAddress);
+    bool checkDeliveryStatus(int orderId);
     bool isOrderReady(int orderId);
 
 private:
