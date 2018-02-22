@@ -6,14 +6,6 @@
 #include <iomanip>
 #include <thread>
 
-OrderSystem & OrderSystem::instance()
-{
-    if (!instance_)
-    {
-        instance_ = new OrderSystem{};
-    }
-    return *instance_;
-}
 
 void OrderSystem::selectPizzeria(Pizzerias p)
 {

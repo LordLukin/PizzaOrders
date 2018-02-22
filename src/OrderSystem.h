@@ -22,10 +22,12 @@ enum PaymentMethod    // TODO: Enum class is safer
 class OrderSystem   // TODO: God class
 {
 public:
-    static OrderSystem& instance();
 
-    OrderSystem(OrderSystem const &) = delete;
-    OrderSystem& operator=(OrderSystem const &) = delete;
+    OrderSystem() = default;
+    ~OrderSystem() = default;
+
+    OrderSystem(OrderSystem const &) = default;
+    OrderSystem& operator=(OrderSystem const &) = default;
 
     bool makeOrder(Pizzas pizzas, std::string deliveryAddress);
     void selectPizzeria(Pizzerias p);
@@ -33,8 +35,6 @@ public:
     void selectPaymentMethod(PaymentMethod pm);
 
 private:
-    ~OrderSystem() = default;
-    OrderSystem() = default;
 
 
     static OrderSystem* instance_;
