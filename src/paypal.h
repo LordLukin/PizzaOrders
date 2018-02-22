@@ -6,7 +6,7 @@
 class PayPal : public PaymentStrategy
 {
 public:
-    int login(std::string username, std::string password) const
+   int login(std::string username, std::string password) const
     {
         std::hash<std::string> h;
         auto sessionId = h(username + password);

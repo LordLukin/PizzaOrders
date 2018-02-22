@@ -10,6 +10,9 @@ bool PayPal::charge(double price) const
         std::cin >> username;
         std::cout << "Password: ";
         std::cin >> password;
-        login(username, password);   // TODO: Return value checking! Was login successful?
+        if (login(username, password) == 0)
+        {
+            return false;
+        }
         return pay(price);
 }
