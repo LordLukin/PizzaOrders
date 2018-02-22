@@ -9,7 +9,14 @@ class Pizza
 {
 public:
     Pizza(std::string const & name, double price, minutes bakingTime);
-    ~Pizza() = default;             // TODO: Non virtual destructor! Possible memory leaks
+
+    Pizza(const Pizza &) = default;
+    Pizza & operator=(const Pizza &) = default;
+    Pizza(Pizza &&) noexcept = default;
+    Pizza & operator=(Pizza &&) noexcept = default;
+    Pizza() = delete;
+    ~Pizza() = default;
+
     std::string getName() const;  // TODO: const correctnest
     double getPrice() const;
     minutes getBakingTime() const;

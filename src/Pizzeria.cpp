@@ -1,7 +1,7 @@
 #include "Pizzeria.h"
 #include <iostream>
 
-Pizzeria::Pizzeria(std::string const & name, Pizzas availablePizzas)
+Pizzeria::Pizzeria(std::string const & name, const Pizzas &availablePizzas)
     : name_(name)
     , availablePizzas_(availablePizzas)
     , orders_()

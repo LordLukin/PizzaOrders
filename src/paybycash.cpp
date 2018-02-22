@@ -1,11 +1,6 @@
 #include "paybycash.h"
 #include <iostream>
 
-PayByCash::PayByCash()
-{
-
-}
-
 bool PayByCash::charge(double price) const
 {
 

@@ -6,13 +6,7 @@
 class PayByCash : public PaymentStrategy
 {
 public:
-
-
-
-    PayByCash();
-
-   bool charge(double price) const override;
-
+    bool charge(double price) const override;
 };
 
 

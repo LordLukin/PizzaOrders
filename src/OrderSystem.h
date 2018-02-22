@@ -10,7 +10,7 @@ enum class Pizzerias
     GRINDTORP
 };
 
-enum class PaymentMethod    // TODO: Enum class is safer
+enum class PaymentMethod
 {
     PAY_PAL,
     CREDIT_CARD,
@@ -21,12 +21,12 @@ enum class PaymentMethod    // TODO: Enum class is safer
 class OrderSystem   // TODO: God class
 {
 public:
-
+    OrderSystem(const OrderSystem &) = default;
+    OrderSystem & operator=(const OrderSystem &) = default;
+    OrderSystem(OrderSystem &&) noexcept = default;
+    OrderSystem & operator=(OrderSystem &&) noexcept = default;
     OrderSystem() = default;
     ~OrderSystem() = default;
-
-    OrderSystem(OrderSystem const &) = default;
-    OrderSystem& operator=(OrderSystem const &) = default;
 
     bool makeOrder(const PaymentStrategy & strategy, Pizzas pizzas, std::string deliveryAddress);
     void selectPizzeria(Pizzerias p);

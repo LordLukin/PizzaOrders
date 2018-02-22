@@ -11,8 +11,15 @@ using order = std::tuple<int, Pizzas, std::chrono::system_clock::time_point, std
 class Pizzeria
 {
 public:
-    Pizzeria(std::string const & name, Pizzas availablePizzas);  // TODO: const &
+    Pizzeria(std::string const & name, const Pizzas& availablePizzas);
     // TODO: Tight coupling - need to create set of pizzas before creating a pizzeria
+    Pizzeria(const Pizzeria &) = default;
+    Pizzeria & operator=(const Pizzeria &) = default;
+    Pizzeria(Pizzeria &&) noexcept = default;
+    Pizzeria & operator=(Pizzeria &&) noexcept = default;
+    Pizzeria() = delete;
+    ~Pizzeria() = default;
+
     std::string getName();
     int makeOrder(Pizzas pizzas);       // TODO: const argument
     bool validateOrder(Pizzas pizzas);  // TODO: const function
