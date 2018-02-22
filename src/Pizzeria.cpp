@@ -20,7 +20,7 @@ bool Pizzeria::validateOrder(Pizzas pizzas)
         bool isAvailable = false;
         for (auto availablePizza : availablePizzas_)
         {
-            if (pizza->getName() == availablePizza->getName())
+            if (pizza.getName() == availablePizza.getName())
             {
                 isAvailable = true;
             }
@@ -38,7 +38,7 @@ int Pizzeria::makeOrder(Pizzas pizzas)  // TODO: it should take deliveryAddress
     for (auto const & pizza : pizzas)
     {
         std::cout << "Pizzeria " << name_
-                  << ". Making a pizza: " << pizza->getName()
+                  << ". Making a pizza: " << pizza.getName()
                   << std::endl;
     }
     int orderId = rand() % 100;  // TODO: Silly orderId function. Collision possible
@@ -52,7 +52,7 @@ double Pizzeria::calculatePrice(Pizzas pizzas)
     double sum = 0.0;
     for (const auto & pizza : pizzas)
     {
-        sum += pizza->getPrice();
+        sum += pizza.getPrice();
     }
     return sum;
 }
@@ -101,7 +101,7 @@ bool Pizzeria::isOrderReady(int orderId)
             auto now = std::chrono::system_clock::now();
             for (auto pizza : std::get<1>(order))
             {
-                if (pizza->getBakingTime() > (now - std::get<2>(order)))
+                if (pizza.getBakingTime() > (now - std::get<2>(order)))
                 {
                     return false;
                 }

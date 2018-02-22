@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "OrderSystem.h"
+#include<string>
 
 using namespace std;
 
@@ -20,12 +21,12 @@ TEST_F(PizzaOrderTest, makeOrderInBravo)
 {
     OrderSystem os;
     os.selectPizzeria(BRAVO);
-    ASSERT_TRUE(os.makeOrder({new Margherita{100.0}}, "some address"));
+    ASSERT_TRUE(os.makeOrder( {Pizza {"Fungi" , 100.0 , minutes (3)}}, "some address"));
 }
 
 TEST_F(PizzaOrderTest, makeOrderWithNotAvailablePizza)
 {
     OrderSystem os;
     os.selectPizzeria(BRAVO);
-    ASSERT_FALSE(os.makeOrder({new Funghi{100.0}}, "some address"));
+    ASSERT_FALSE(os.makeOrder( {Pizza {"KebabPizza" , 100.0 , minutes (3)}}, "some address"));
 }
