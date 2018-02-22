@@ -1,7 +1,7 @@
 #include "OrderSystem.h"
-#include "DotPay.h"
-#include "PayPal.h"
-#include "CreditCardSystem.h"
+#include "dotpay.h"
+#include "paypal.h"
+#include "creditcardsystem.h"
 #include <iostream>
 #include <iomanip>
 #include <thread>
@@ -23,13 +23,13 @@ void OrderSystem::selectPizzeria(Pizzerias p)
     }
 }
 
-bool OrderSystem::makeOrder(Pizzas pizzas, std::string deliveryAddress)
+bool OrderSystem::makeOrder(const PaymentStrategy & payment, Pizzas pizzas, std::string deliveryAddress)
 {
     if (selected_->validateOrder(pizzas))
     {
         auto price = selected_->calculatePrice(pizzas);
         std::cout << "You need to pay " << price << " SEK." << std::endl;
-        if (charge(price))
+        if (charge(price, payment))
         {
             int orderId = selected_->makeOrder(pizzas);
             std::cout << "Your order has id " << orderId << std::endl;
@@ -83,86 +83,15 @@ bool OrderSystem::makeOrder(Pizzas pizzas, std::string deliveryAddress)
     }
 }
 
-void OrderSystem::selectPaymentMethod(PaymentMethod pm)
-{
-    if (pm == PAY_PAL)
-        paymentMethod_ = 0;
-    else if (pm == CREDIT_CARD)
-        paymentMethod_ = 2;
-    else if (pm == DOTPAY)
-        paymentMethod_ = 1;
-    else
-        paymentMethod_ =  3;
-}
 
-bool OrderSystem::charge(double price)
+bool OrderSystem::charge(double price, const PaymentStrategy & paymentStrategy)
 {
-    bool success;           // TODO: Unintialized data
+   // return paymentStrategy.charge(price);
     // TODO: to a common base class as a payment interface. Now every system has another interface
     // TODO: Strategy pattern. Right now this function is a Facade pattern
-    if (paymentMethod_ == 0)  // PayPal
-    {
-        std::string username;
-        std::string password;
-        std::cout << "Provide your PayPal credentials" << std::endl;
-        std::cout << "Username: ";
-        std::cin >> username;
-        std::cout << "Password: ";
-        std::cin >> password;
-        PayPal::login(username, password);   // TODO: Return value checking! Was login successful?
-        success = PayPal::pay(price);
-    }
-    else if (paymentMethod_ == 1) // dotpay
-    {
-        std::cout << "DotPay payment was chosen" << std::endl;
-        int timer = 0;
-        bool valid;
-        std::cout << "Waiting for confirmation from online system" << std::endl;
-        do  // TODO: observer pattern
-        {
-            std::chrono::seconds waitTime(1);
-            std::this_thread::sleep_for(waitTime);
-            timer += 1;
-            valid = DotPay::sslPaymentReditect(price);
-        } while (!valid && timer < 300);
-        success = valid;
-    }
-    else if (paymentMethod_ == 2) // CreditCard
-    {
-        std::string cardNumber;
-        std::string owner;
-        int monthValid;
-        int yearValid;
-        int ccv;
-        std::cout << "Provide your credit card information:" << std::endl;
-        std::cout << "Card number: ";
-        std::cin >> cardNumber;
-        std::cout << "Owner's name and surname: ";
-        std::cin >> owner;
-        std::cout << "Valid until month: ";
-        std::cin >> monthValid;
-        std::cout << "Valid until year: ";
-        std::cin >> yearValid;
-        std::cout << "CCV code: ";
-        std::cin >> ccv;
-        bool isDataValid = CreditCardSystem::enterData(cardNumber, owner, monthValid, yearValid, ccv);
-        if (isDataValid)
-        {
-            success = CreditCardSystem::charge(price);
-        }
-        else
-        {
-            std::cout << "Invalid credit card data" << std::endl;
-            success = false;
-        }
-    }
-    else // payByCash
-    {
-        std::cout << "Payment by cash selected. Please prepare " << price << " SEK in cash. " << std::endl;
-        success = true;
-    }
+    // payByCash
 
-    if (success)
+    if (paymentStrategy.charge(price) )
     {
         std::cout << "Payment was successful" << std::endl;
         return true;

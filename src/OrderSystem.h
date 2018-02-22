@@ -1,6 +1,7 @@
 #pragma once
 #include "Pizzeria.h"
 #include "Pizza.h"
+#include"paymentstrategy.h"
 
 enum Pizzerias
 {
@@ -27,13 +28,12 @@ public:
     OrderSystem(OrderSystem const &) = default;
     OrderSystem& operator=(OrderSystem const &) = default;
 
-    bool makeOrder(Pizzas pizzas, std::string deliveryAddress);
+    bool makeOrder(const PaymentStrategy & strategy, Pizzas pizzas, std::string deliveryAddress);
     void selectPizzeria(Pizzerias p);
-    bool charge(double price);                          // TODO: should be private
-    void selectPaymentMethod(PaymentMethod pm);
 
 private:
 
+     bool charge(double price, const PaymentStrategy &paymentStrategy);  // TODO: should be private
 
     static OrderSystem* instance_;
     Pizzeria* selected_;  // TODO: not initialized
@@ -44,5 +44,5 @@ private:
     // Additionaly, if time allows: methods for adding/removing pizzerias in runtime are missing
     Pizzeria venezia_{"Venezia - real Italian pizza", { Pizza{"Margherita", 100.0, minutes(3)}}};
     Pizzeria bravo_{"Bravo - good and cheap pizza", { Pizza{"Fungi", 80.0, minutes(4)}}};
-    Pizzeria grindtorp_{"Grindtorp pizzeria - local pizza", { Pizza{"Margherita", 90.0, minutes(3)},  Pizza{"Funghi", 110.0, minutes(3)}}};
+    Pizzeria grindtorp_{"Grindtorp pizzeria - local pizza", { Pizza{"Margherita", 90.0, minutes(3)}, Pizza{"Funghi", 110.0, minutes(3)}}};
 };

@@ -43,6 +43,10 @@ set(SRC_LIST
     src/OrderSystem.cpp
     src/Pizza.cpp
     src/Pizzeria.cpp
+    src/paypal.cpp
+    src/dotpay.cpp
+    src/creditcardsystem.cpp
+    src/paybycash.cpp
 )
 
 include_directories(src)

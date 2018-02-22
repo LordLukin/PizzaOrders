@@ -1,11 +1,12 @@
 #pragma once
 #include <thread>
 #include <future>
+#include "paymentstrategy.h"
 
-class DotPay
+class DotPay : public PaymentStrategy
 {
 public:
-    static bool sslPaymentReditect(double price)
+    bool sslPaymentRedirect(double price) const
     {
         std::future<bool> ret = std::async([]()
         {
@@ -16,4 +17,5 @@ public:
         bool status = ret.get();
         return status;
     }
+    bool charge(double price) const override;
 };

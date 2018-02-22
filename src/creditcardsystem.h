@@ -1,7 +1,8 @@
 #pragma once
 #include <string>
+#include "paymentstrategy.h"
 
-class CreditCardSystem
+class CreditCardSystem : public PaymentStrategy
 {
 public:
    static bool enterData(std::string cardNumber, std::string owner, int monthValid, int yearValid, int ccv)
@@ -19,16 +20,5 @@ public:
     }
 
 
-   static bool charge(double price)
-    {
-        if (price <= 100.0)
-        {
-            return true;
-        }
-        else
-        {
-            // Simulation for not enough amount of money on the card
-            return false;
-        }
-    }
+   virtual bool charge(double price) const override;
 };
