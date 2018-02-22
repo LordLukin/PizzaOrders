@@ -6,8 +6,9 @@
 #include "IPayment.hpp"
 #include <memory>
 #include <Cash.h>
+#include <map>
 
-enum Pizzerias
+enum class PizzeriaKey
 {
     VENEZIA = 0,
     BRAVO,
@@ -27,23 +28,18 @@ class OrderSystem   // TODO: God class
 public:
     ~OrderSystem() = default;
     OrderSystem() = default;
+    OrderSystem(std::map<PizzeriaKey, Pizzeria> & pizzerias);
 
     OrderSystem(OrderSystem const &) = delete;
     OrderSystem& operator=(OrderSystem const &) = delete;
 
     bool makeOrder(Pizzas pizzas, std::string deliveryAddress);
-    void selectPizzeria(Pizzerias p);
+    void selectPizzeria(PizzeriaKey p);
     bool charge(double price);                          // TODO: should be private
     void selectPaymentMethod(std::unique_ptr<IPayment> pm);
 
 private:
-    Pizzeria* selected_;  // TODO: not initialized
+    std::map<PizzeriaKey, Pizzeria> pizzerias_;
+    Pizzeria* selectedPizzeria_;  // TODO: not initialized
     std::unique_ptr<IPayment> paymentMethod_ = std::make_unique<Cash>();
-
-    // TODO: pizzerias should be added via constructor, which is not available now
-    // They are tightly couple right now. They should be kept in a collection
-    // Additionaly, if time allows: methods for adding/removing pizzerias in runtime are missing
-    Pizzeria venezia_{"Venezia - real Italian pizza", {new Funghi{100.0}}};
-    Pizzeria bravo_{"Bravo - good and cheap pizza", {new Margherita{80.0}}};
-    Pizzeria grindtorp_{"Grindtorp pizzeria - local pizza", {new Margherita{90.0}, new Funghi{110.0}}};
 };

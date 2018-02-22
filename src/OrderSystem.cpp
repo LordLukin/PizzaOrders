@@ -4,31 +4,25 @@
 #include <iomanip>
 #include <thread>
 
-void OrderSystem::selectPizzeria(Pizzerias p)
+OrderSystem::OrderSystem(std::map<PizzeriaKey, Pizzeria>& pizzerias)
+    : pizzerias_(pizzerias)
 {
-    switch (p)
-    {
-    case VENEZIA:
-        selected_ = &venezia_;
-        break;
-    case BRAVO:
-        selected_ = &bravo_;
-        break;
-    case GRINDTORP:
-        selected_ = &grindtorp_;
-        break;
-    }
+}
+
+void OrderSystem::selectPizzeria(PizzeriaKey p)
+{
+    selectedPizzeria_ = &pizzerias_.at(p);
 }
 
 bool OrderSystem::makeOrder(Pizzas pizzas, std::string deliveryAddress)
 {
-    if (selected_->validateOrder(pizzas))
+    if (selectedPizzeria_->validateOrder(pizzas))
     {
-        auto price = selected_->calculatePrice(pizzas);
+        auto price = selectedPizzeria_->calculatePrice(pizzas);
         std::cout << "You need to pay " << price << " SEK." << std::endl;
         if (charge(price))
         {
-            int orderId = selected_->makeOrder(pizzas);
+            int orderId = selectedPizzeria_->makeOrder(pizzas);
             std::cout << "Your order has id " << orderId << std::endl;
 
             std::cout << "---- RECEIPT ----" << std::endl;
@@ -43,7 +37,7 @@ bool OrderSystem::makeOrder(Pizzas pizzas, std::string deliveryAddress)
             bool isOrderReady = false;
             do  // TODO: from active polling to observer pattern
             {
-                isOrderReady = selected_->isOrderReady(orderId);
+                isOrderReady = selectedPizzeria_->isOrderReady(orderId);
                 std::cout << "Order is not ready yet. Wait for the orderId " << orderId
                           << " to finish" << std::endl;
                 std::this_thread::sleep_for(minutes(2));
@@ -51,13 +45,13 @@ bool OrderSystem::makeOrder(Pizzas pizzas, std::string deliveryAddress)
 
             std::cout << "Your order with id " << orderId << " is ready" << std::endl;
 
-            auto deliveryId = selected_->setDeliveryAddress(orderId, deliveryAddress);
+            auto deliveryId = selectedPizzeria_->setDeliveryAddress(orderId, deliveryAddress);
             std::cout << "Expect delivery soon to " << deliveryAddress << std::endl;
 
             bool isOrderDelivered = false;
             do
             {
-                isOrderDelivered = selected_->checkDeliveryStatus(deliveryId);
+                isOrderDelivered = selectedPizzeria_->checkDeliveryStatus(deliveryId);
                 std::cout << "Please be patient. Your pizza is on the way." << std::endl;
                 std::this_thread::sleep_for(minutes(2));
             } while (!isOrderDelivered);
@@ -74,7 +68,7 @@ bool OrderSystem::makeOrder(Pizzas pizzas, std::string deliveryAddress)
     else
     {
         std::cout << "At least one of selected pizza is not available in "
-                  << selected_->getName()
+                  << selectedPizzeria_->getName()
                   << std::endl;
         return false;
     }

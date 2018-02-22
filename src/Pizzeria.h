@@ -5,12 +5,17 @@
 #include <chrono>
 #include "Pizzeria.h"
 #include "Pizza.h"
+#include <iostream>
 
 using order = std::tuple<int, Pizzas, std::chrono::system_clock::time_point, std::string, int>;
 
 class Pizzeria
 {
 public:
+    Pizzeria()
+    {
+        std::cout << "Should not be called!" << std::endl;
+    }
     Pizzeria(std::string const & name, Pizzas availablePizzas);  // TODO: const &
     // TODO: Tight coupling - need to create set of pizzas before creating a pizzeria
     std::string getName();
