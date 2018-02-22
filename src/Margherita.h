@@ -7,7 +7,4 @@ public:
     Margherita() = delete;
     Margherita(double price);
 
-private:
-    Ingredient mozzarella_;
-    Ingredient tomatoSauce_;
 };

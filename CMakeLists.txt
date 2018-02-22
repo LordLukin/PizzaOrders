@@ -41,7 +41,6 @@ project(PizzaOrders)
 
 set(SRC_LIST
     src/Funghi.cpp
-    src/Ingredient.cpp
     src/Margherita.cpp
     src/OrderSystem.cpp
     src/Pizza.cpp

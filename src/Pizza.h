@@ -2,7 +2,7 @@
 #include <list>
 #include <set>
 #include <chrono>
-#include "Ingredient.h"
+#include <string>
 
 using minutes = std::chrono::seconds;   // To simulate time flow ;)
 
@@ -14,13 +14,11 @@ public:
     virtual std::string getName();  // TODO: const correctnest
     virtual double getPrice() const;
     virtual minutes getBakingTime() const;
-    void addIngreditent(Ingredient ingredient);
 
 private:
     std::string name_;
     double price_;
     minutes bakingTime_;
-    std::list<Ingredient> ingredients_;  // TODO: Seems not used
 };
 
 using Pizzas = std::set<Pizza*>;
