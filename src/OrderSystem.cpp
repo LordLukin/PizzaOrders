@@ -111,61 +111,17 @@ bool OrderSystem::charge(double price)
     if (paymentMethod_ == 0)  // PayPal
     {
         PayPal pp;
-        std::string username;
-        std::string password;
-        std::cout << "Provide your PayPal credentials" << std::endl;
-        std::cout << "Username: ";
-        std::cin >> username;
-        std::cout << "Password: ";
-        std::cin >> password;
-        pp.login(username, password);   // TODO: Return value checking! Was login successful?
-        success = pp.pay(price);
+        success = pp.charge(price);
     }
     else if (paymentMethod_ == 1) // dotpay
     {
-        std::cout << "DotPay payment was chosen" << std::endl;
         DotPay dp;
-        int timer = 0;
-        bool valid;
-        std::cout << "Waiting for confirmation from online system" << std::endl;
-        do  // TODO: observer pattern
-        {
-            std::chrono::seconds waitTime(1);
-            std::this_thread::sleep_for(waitTime);
-            timer += 1;
-            valid = dp.sslPaymentReditect(price);
-        } while (!valid && timer < 300);
-        success = valid;
+        success = dp.charge(price);
     }
     else if (paymentMethod_ == 2) // CreditCard
     {
         CreditCardSystem ccs;
-        std::string cardNumber;
-        std::string owner;
-        int monthValid;
-        int yearValid;
-        int ccv;
-        std::cout << "Provide your credit card information:" << std::endl;
-        std::cout << "Card number: ";
-        std::cin >> cardNumber;
-        std::cout << "Owner's name and surname: ";
-        std::cin >> owner;
-        std::cout << "Valid until month: ";
-        std::cin >> monthValid;
-        std::cout << "Valid until year: ";
-        std::cin >> yearValid;
-        std::cout << "CCV code: ";
-        std::cin >> ccv;
-        bool isDataValid = ccs.enterData(cardNumber, owner, monthValid, yearValid, ccv);
-        if (isDataValid)
-        {
-            success = ccs.charge(price);
-        }
-        else
-        {
-            std::cout << "Invalid credit card data" << std::endl;
-            success = false;
-        }
+        success = ccs.charge(price);
     }
     else // payByCash
     {
