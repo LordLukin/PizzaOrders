@@ -1,7 +1,8 @@
 #pragma once
 #include "Pizzeria.h"
 #include "Pizza.h"
-#include"paymentstrategy.h"
+#include "paymentstrategy.h"
+#include <vector>
 
 enum class Pizzerias
 {
@@ -21,11 +22,13 @@ enum class PaymentMethod
 class OrderSystem   // TODO: God class
 {
 public:
+    OrderSystem(const std::vector<Pizzeria>& _allPizzerias) :
+        ourPizzerias(_allPizzerias){}
     OrderSystem(const OrderSystem &) = default;
     OrderSystem & operator=(const OrderSystem &) = default;
     OrderSystem(OrderSystem &&) noexcept = default;
     OrderSystem & operator=(OrderSystem &&) noexcept = default;
-    OrderSystem() = default;
+    //OrderSystem() = default;
     ~OrderSystem() = default;
 
     bool makeOrder(const PaymentStrategy & strategy, Pizzas pizzas, std::string deliveryAddress);
@@ -33,16 +36,16 @@ public:
 
 private:
 
-     bool charge(double price, const PaymentStrategy &paymentStrategy);  // TODO: should be private
+    bool charge(double price, const PaymentStrategy &paymentStrategy);
 
-    static OrderSystem* instance_;
-    Pizzeria* selected_;  // TODO: not initialized
-    int paymentMethod_;   // TODO: not initialized
+    Pizzeria* selected_ = nullptr;
+    std::vector<Pizzeria> ourPizzerias;
 
     // TODO: pizzerias should be added via constructor, which is not available now
     // They are tightly couple right now. They should be kept in a collection
     // Additionaly, if time allows: methods for adding/removing pizzerias in runtime are missing
-    Pizzeria venezia_{"Venezia - real Italian pizza", { Pizza{"Margherita", 100.0, minutes(3)}}};
-    Pizzeria bravo_{"Bravo - good and cheap pizza", { Pizza{"Fungi", 80.0, minutes(4)}}};
-    Pizzeria grindtorp_{"Grindtorp pizzeria - local pizza", { Pizza{"Margherita", 90.0, minutes(3)}, Pizza{"Funghi", 110.0, minutes(3)}}};
+
+    void printReceipt(Pizzas pizzas, auto price);
+    void waitForOrder(int orderId);
+    void waitForDelivery(int orderId);
 };

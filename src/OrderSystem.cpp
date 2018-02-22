@@ -12,16 +12,52 @@ void OrderSystem::selectPizzeria(Pizzerias p)
     switch (p)
     {
     case Pizzerias::VENEZIA:
-        selected_ = &venezia_;
+        selected_ = &ourPizzerias[0];
         break;
     case Pizzerias::BRAVO:
-        selected_ = &bravo_;
+       selected_ = &ourPizzerias[1];
         break;
     case Pizzerias::GRINDTORP:
-        selected_ = &grindtorp_;
+        selected_ = &ourPizzerias[2];
         break;
     }
 }
+
+void OrderSystem::printReceipt(Pizzas pizzas, auto price)
+{
+    std::cout << "---- RECEIPT ----" << std::endl;
+    for (auto pizza : pizzas)
+    {
+        std::cout << std::fixed << std::right << std::setprecision(2);
+        std::cout << " " << pizza.getName() << " " << pizza.getPrice() << std::endl;
+    }
+    std::cout << "-----------------" << std::endl;
+    std::cout << " TOTAL: " << price << std::endl;
+}
+
+void OrderSystem::waitForOrder(int orderId)
+{
+    bool isOrderReady = false;
+    do  // TODO: from active polling to observer pattern
+    {
+        isOrderReady = selected_->isOrderReady(orderId);
+        std::cout << "Order is not ready yet. Wait for the orderId " << orderId
+                  << " to finish" << std::endl;
+        std::this_thread::sleep_for(minutes(2));
+    } while (!isOrderReady);
+}
+
+void OrderSystem::waitForDelivery(int orderId)
+{
+    bool isOrderDelivered = false;
+    do
+    {
+        isOrderDelivered = selected_->checkDeliveryStatus(orderId);
+        std::cout << "Please be patient. Your pizza is on the way." << std::endl;
+        std::this_thread::sleep_for(minutes(2));
+    } while (!isOrderDelivered);
+}
+
 
 bool OrderSystem::makeOrder(const PaymentStrategy & payment, Pizzas pizzas, std::string deliveryAddress)
 {
@@ -34,36 +70,15 @@ bool OrderSystem::makeOrder(const PaymentStrategy & payment, Pizzas pizzas, std:
             int orderId = selected_->makeOrder(pizzas, deliveryAddress);
             std::cout << "Your order has id " << orderId << std::endl;
 
-            std::cout << "---- RECEIPT ----" << std::endl;
-            for (auto pizza : pizzas)
-            {
-                std::cout << std::fixed << std::right << std::setprecision(2);
-                std::cout << " " << pizza.getName() << " " << pizza.getPrice() << std::endl;
-            }
-            std::cout << "-----------------" << std::endl;
-            std::cout << " TOTAL: " << price << std::endl;
+            printReceipt(pizzas, price);
 
-            bool isOrderReady = false;
-            do  // TODO: from active polling to observer pattern
-            {
-                isOrderReady = selected_->isOrderReady(orderId);
-                std::cout << "Order is not ready yet. Wait for the orderId " << orderId
-                          << " to finish" << std::endl;
-                std::this_thread::sleep_for(minutes(2));
-            } while (!isOrderReady);
+            waitForOrder(orderId);
 
             std::cout << "Your order with id " << orderId << " is ready" << std::endl;
 
-            //auto deliveryId = selected_->setDeliveryAddress(orderId, deliveryAddress);
             std::cout << "Expect delivery soon to " << deliveryAddress << std::endl;
 
-            bool isOrderDelivered = false;
-            do
-            {
-                isOrderDelivered = selected_->checkDeliveryStatus(orderId);
-                std::cout << "Please be patient. Your pizza is on the way." << std::endl;
-                std::this_thread::sleep_for(minutes(2));
-            } while (!isOrderDelivered);
+            waitForDelivery(orderId);
 
             std::cout << "Pizza delivered. Thank you for using our system!" << std::endl;
             return true;
@@ -99,4 +114,3 @@ bool OrderSystem::charge(double price, const PaymentStrategy & paymentStrategy)
     return false;
 }
 
-OrderSystem* OrderSystem::instance_ = nullptr;

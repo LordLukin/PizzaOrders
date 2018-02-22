@@ -13,10 +13,10 @@ std::string Pizzeria::getName()
     return name_;
 }
 
-bool Pizzeria::validateOrder(const Pizzas& pizzas)
+bool Pizzeria::validateOrder(const Pizzas& pizzas) const
 {
     // TODO: whole alghoritm is std::includes
-    for (auto pizza : pizzas) // TODO: const &
+    for (const auto& pizza : pizzas)
     {
         bool isAvailable = false;
         for (auto availablePizza : availablePizzas_)

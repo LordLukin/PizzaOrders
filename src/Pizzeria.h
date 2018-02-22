@@ -21,8 +21,8 @@ public:
     ~Pizzeria() = default;
 
     std::string getName();
-    int makeOrder(const Pizzas& pizzas, const std::string& deliveryAddress);       // TODO: const argument
-    bool validateOrder(const Pizzas& pizzas);  // TODO: const function
+    int makeOrder(const Pizzas& pizzas, const std::string& deliveryAddress);
+    bool validateOrder(const Pizzas& pizzas) const;
     double calculatePrice(const Pizzas& pizzas);
     //int setDeliveryAddress(int orderId, std::string deliveryAddress);
     bool checkDeliveryStatus(int orderId);
