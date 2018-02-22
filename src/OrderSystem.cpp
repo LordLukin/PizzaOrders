@@ -4,16 +4,6 @@
 #include <iomanip>
 #include <thread>
 
-
-OrderSystem & OrderSystem::instance()
-{
-    if (!instance_)
-    {
-        instance_ = new OrderSystem{};
-    }
-    return *instance_;
-}
-
 void OrderSystem::selectPizzeria(Pizzerias p)
 {
     switch (p)
@@ -102,5 +92,3 @@ bool OrderSystem::charge(double price)
     }
     return paymentMethod_->charge(price);
 }
-
-OrderSystem* OrderSystem::instance_ = nullptr;

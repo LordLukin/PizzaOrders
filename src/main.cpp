@@ -8,7 +8,7 @@
 
 int main()
 {
-    OrderSystem& os = OrderSystem::instance();
+    OrderSystem os;
 
     os.selectPizzeria(GRINDTORP);
     os.selectPaymentMethod(std::move(std::make_unique<Cash>()));
