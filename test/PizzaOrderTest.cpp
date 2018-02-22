@@ -9,6 +9,7 @@
 #include "Mozzarella.h"
 #include "Mushrooms.h"
 #include "Ham.h"
+#include "PizzaBible.h"
 
 
 using namespace std;
@@ -95,16 +96,8 @@ TEST_F(PizzaOrderTest, makeSuperPizza)
 
 TEST_F(PizzaOrderTest, makeCapricosaPizza)
 {
-    Pizza p;
-    Mozzarella m(&p);
-    Ham h(&m);
-    Mushrooms mushrooms(&h);
+    IPizza* cap = PizzaBible().makePizza(PizzaType::Capriciosa);
 
-    using Capricosa = Mushrooms{Ham{Mozzarella{Pizza{}}}};
-
-    Capricosa c;
-    c.getPrice();
-
-    std::cout << mushrooms.toString() << std::endl;
-    std::cout << "Price, super pizza: " << mushrooms.getPrice() << std::endl;
+    std::cout << cap->toString() << std::endl;
+    std::cout << "Price, super pizza: " << cap->getPrice() << std::endl;
 }
