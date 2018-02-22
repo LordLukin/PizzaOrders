@@ -3,14 +3,14 @@
 #include "Pizza.h"
 #include"paymentstrategy.h"
 
-enum Pizzerias
+enum class Pizzerias
 {
     VENEZIA = 0,
     BRAVO,
     GRINDTORP
 };
 
-enum PaymentMethod    // TODO: Enum class is safer
+enum class PaymentMethod    // TODO: Enum class is safer
 {
     PAY_PAL,
     CREDIT_CARD,

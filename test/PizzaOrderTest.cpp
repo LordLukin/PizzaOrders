@@ -21,7 +21,7 @@ TEST_F(PizzaOrderTest, paymentByCashIsAlwaysSuccessfull)
 TEST_F(PizzaOrderTest, makeOrderInBravo)
 {
     OrderSystem os;
-    os.selectPizzeria(BRAVO);
+    os.selectPizzeria(Pizzerias::BRAVO);
     const PaymentStrategy& paybycash = PayByCash();
     ASSERT_TRUE(os.makeOrder( paybycash, {Pizza {"Fungi" , 100.0 , minutes (3)}}, "some address"));
 }
@@ -29,7 +29,7 @@ TEST_F(PizzaOrderTest, makeOrderInBravo)
 TEST_F(PizzaOrderTest, makeOrderWithNotAvailablePizza)
 {
     OrderSystem os;
-    os.selectPizzeria(BRAVO);
+    os.selectPizzeria(Pizzerias::BRAVO);
     const PaymentStrategy& paybycash = PayByCash();
     ASSERT_FALSE(os.makeOrder(paybycash, {Pizza {"KebabPizza" , 100.0 , minutes (3)}}, "some address"));
 }

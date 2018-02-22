@@ -11,13 +11,13 @@ void OrderSystem::selectPizzeria(Pizzerias p)
 {
     switch (p)
     {
-    case VENEZIA:
+    case Pizzerias::VENEZIA:
         selected_ = &venezia_;
         break;
-    case BRAVO:
+    case Pizzerias::BRAVO:
         selected_ = &bravo_;
         break;
-    case GRINDTORP:
+    case Pizzerias::GRINDTORP:
         selected_ = &grindtorp_;
         break;
     }
