@@ -15,14 +15,6 @@ enum class PizzeriaKey
     GRINDTORP
 };
 
-enum PaymentMethod    // TODO: Enum class is safer
-{
-    PAY_PAL,
-    CREDIT_CARD,
-    DOTPAY,
-    CASH
-};
-
 class OrderSystem   // TODO: God class
 {
 public:
@@ -40,6 +32,6 @@ public:
 
 private:
     std::map<PizzeriaKey, Pizzeria> pizzerias_;
-    Pizzeria* selectedPizzeria_;  // TODO: not initialized
+    Pizzeria* selectedPizzeria_ = nullptr;
     std::unique_ptr<IPayment> paymentMethod_ = std::make_unique<Cash>();
 };
