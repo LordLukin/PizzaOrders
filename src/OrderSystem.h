@@ -3,6 +3,9 @@
 #include "Pizza.h"
 #include "Margherita.h"
 #include "Funghi.h"
+#include "IPayment.hpp"
+#include <memory>
+#include <Cash.h>
 
 enum Pizzerias
 {
@@ -30,7 +33,7 @@ public:
     bool makeOrder(Pizzas pizzas, std::string deliveryAddress);
     void selectPizzeria(Pizzerias p);
     bool charge(double price);                          // TODO: should be private
-    void selectPaymentMethod(PaymentMethod pm);
+    void selectPaymentMethod(std::unique_ptr<IPayment> pm);
 
 private:
     ~OrderSystem() = default;
@@ -39,7 +42,7 @@ private:
 
     static OrderSystem* instance_;
     Pizzeria* selected_;  // TODO: not initialized
-    int paymentMethod_;   // TODO: not initialized
+    std::unique_ptr<IPayment> paymentMethod_ = std::make_unique<Cash>();
 
     // TODO: pizzerias should be added via constructor, which is not available now
     // They are tightly couple right now. They should be kept in a collection

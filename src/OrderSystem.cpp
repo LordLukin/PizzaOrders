@@ -1,10 +1,9 @@
 #include "OrderSystem.h"
-#include "DotPay.h"
-#include "PayPal.h"
-#include "CreditCardSystem.h"
+#include "IPayment.hpp"
 #include <iostream>
 #include <iomanip>
 #include <thread>
+
 
 OrderSystem & OrderSystem::instance()
 {
@@ -91,50 +90,17 @@ bool OrderSystem::makeOrder(Pizzas pizzas, std::string deliveryAddress)
     }
 }
 
-void OrderSystem::selectPaymentMethod(PaymentMethod pm)
+void OrderSystem::selectPaymentMethod(std::unique_ptr<IPayment> pm)
 {
-    if (pm == PAY_PAL)
-        paymentMethod_ = 0;
-    else if (pm == CREDIT_CARD)
-        paymentMethod_ = 2;
-    else if (pm == DOTPAY)
-        paymentMethod_ = 1;
-    else
-        paymentMethod_ =  3;
+    paymentMethod_ = std::move(pm);
 }
 
 bool OrderSystem::charge(double price)
 {
-    bool success;           // TODO: Unintialized data
-    // TODO: to a common base class as a payment interface. Now every system has another interface
-    // TODO: Strategy pattern. Right now this function is a Facade pattern
-    if (paymentMethod_ == 0)  // PayPal
-    {
-        PayPal pp;
-        success = pp.charge(price);
+    if (paymentMethod_ == nullptr) {
+        std::cout << "No payment method selected" << std::endl;
     }
-    else if (paymentMethod_ == 1) // dotpay
-    {
-        DotPay dp;
-        success = dp.charge(price);
-    }
-    else if (paymentMethod_ == 2) // CreditCard
-    {
-        CreditCardSystem ccs;
-        success = ccs.charge(price);
-    }
-    else // payByCash
-    {
-        std::cout << "Payment by cash selected. Please prepare " << price << " SEK in cash. " << std::endl;
-        success = true;
-    }
-
-    if (success)
-    {
-        std::cout << "Payment was successful" << std::endl;
-        return true;
-    }
-    return false;
+    return paymentMethod_->charge(price);
 }
 
 OrderSystem* OrderSystem::instance_ = nullptr;
