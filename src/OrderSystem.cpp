@@ -75,7 +75,7 @@ bool OrderSystem::makeOrder(Pizzas pizzas, std::string deliveryAddress)
             {
                 isOrderDelivered = selected_->checkDeliveryStatus(deliveryId);
                 std::cout << "Please be patient. Your pizza is on the way." << std::endl;
-                std::this_thread::sleep_for(minutes(2));
+                time->wait(minutes(2));
             } while (!isOrderDelivered);
 
             std::cout << "Pizza delivered. Thank you for using our system!" << std::endl;
@@ -136,7 +136,7 @@ bool OrderSystem::charge(double price)
         do  // TODO: observer pattern
         {
             std::chrono::seconds waitTime(1);
-            std::this_thread::sleep_for(waitTime);
+            time -> wait(minutes(waitTime));
             timer += 1;
             valid = dp.sslPaymentReditect(price);
         } while (!valid && timer < 300);
