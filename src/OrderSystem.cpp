@@ -67,13 +67,12 @@ bool OrderSystem::makeOrder(Pizzas pizzas, std::string deliveryAddress)
 
             std::cout << "Your order with id " << orderId << " is ready" << std::endl;
 
-            auto deliveryId = selected_->setDeliveryAddress(orderId, deliveryAddress);
             std::cout << "Expect delivery soon to " << deliveryAddress << std::endl;
 
             bool isOrderDelivered = false;
             do
             {
-                isOrderDelivered = selected_->checkDeliveryStatus(deliveryId);
+                isOrderDelivered = selected_->checkDeliveryStatus(orderId);
                 std::cout << "Please be patient. Your pizza is on the way." << std::endl;
                 time->wait(minutes(2));
             } while (!isOrderDelivered);

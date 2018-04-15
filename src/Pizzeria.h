@@ -5,7 +5,7 @@
 #include <chrono>
 #include "Pizza.h"
 
-using order = std::tuple<int, Pizzas, std::chrono::system_clock::time_point, std::string, int>;
+using Order = std::tuple<int, Pizzas, std::chrono::system_clock::time_point, std::string>;
 
 class Pizzeria
 {
@@ -17,12 +17,12 @@ public:
     bool validateOrder(Pizzas pizzas);  // TODO: const function
     double calculatePrice(Pizzas pizzas);
     int setDeliveryAddress(int orderId, std::string deliveryAddress);
-    bool checkDeliveryStatus(int deliveryId);
+    bool checkDeliveryStatus(int orderId);
     bool isOrderReady(int orderId);
 
 private:
     ITime *time_;
     std::string name_;
     Pizzas availablePizzas_;
-    std::vector<order> orders_;
+    std::vector<Order> orders_;
 };

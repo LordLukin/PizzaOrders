@@ -44,7 +44,7 @@ int Pizzeria::makeOrder(Pizzas pizzas)  // TODO: it should take deliveryAddress
                   << std::endl;
     }
     int orderId = rand() % 100;  // TODO: Silly orderId function. Collision possible
-    orders_.push_back(std::make_tuple(orderId, pizzas, std::chrono::system_clock::now(), "", 0));
+    orders_.push_back(std::make_tuple(orderId, pizzas, std::chrono::system_clock::now(), ""));
     return orderId;
 }
 
@@ -61,27 +61,22 @@ double Pizzeria::calculatePrice(Pizzas pizzas)
 
 int Pizzeria::setDeliveryAddress(int orderId, std::string deliveryAddress)
 {
-    int deliveryId;  // TODO: Not initialized
     for (auto & order : orders_)
     {
         if (std::get<0>(order) == orderId)
         {
             std::get<3>(order) = deliveryAddress;
-            // TODO: deliveryId is not needed. OrderId should be enough
-            deliveryId = rand() % 100;  // TODO: Silly algorithm. Collision possible
-            std::get<4>(order) = deliveryId;
-            std::cout << "Delivery address set to " << std::get<3>(order)
-                      << ". DeliveryId = " << std::get<4>(order) << std::endl;
+            std::cout << "Delivery address set to " << std::get<3>(order) << std::endl;
         }
     }
-    return deliveryId;
+    return orderId;
 }
 
-bool Pizzeria::checkDeliveryStatus(int deliveryId)
+bool Pizzeria::checkDeliveryStatus(int orderId)
 {
     for (auto order : orders_)
     {
-        if (std::get<4>(order) == deliveryId)
+        if (std::get<0>(order) == orderId)
         {
             auto now = std::chrono::system_clock::now();
             if(time_->waitForDelivery(std::get<2>(order)))
