@@ -17,7 +17,7 @@ std::string Pizzeria::getName()
 bool Pizzeria::validateOrder(Pizzas pizzas)
 {
     // TODO: whole alghoritm is std::includes
-    for (auto pizza : pizzas) // TODO: const &
+    for (const auto &pizza : pizzas)
     {
         bool isAvailable = false;
         for (auto availablePizza : availablePizzas_)
@@ -50,14 +50,13 @@ int Pizzeria::makeOrder(Pizzas pizzas)  // TODO: it should take deliveryAddress
 
 double Pizzeria::calculatePrice(Pizzas pizzas)
 {
-    // TODO: std::accumulate
-    double sum = 0.0;
-    sum=std::accumulate(pizzas.begin(),pizzas.end(),0.0,[](double previousSum, Pizza *pizza){return previousSum + pizza->getPrice();});
-    //for (const auto & pizza : pizzas)
-    //{
-    //    sum += pizza->getPrice();
-    //}
-    return sum;
+    return std::accumulate(pizzas.begin(),
+                           pizzas.end(),
+                           0.0,
+                           [](double previousSum, Pizza *pizza)
+                           {
+                               return previousSum + pizza->getPrice();
+                           });
 }
 
 int Pizzeria::setDeliveryAddress(int orderId, std::string deliveryAddress)
