@@ -4,7 +4,7 @@ Pizza::Pizza(std::string const & name, double price, minutes bakingTime)
     : name_(name), price_(price), bakingTime_(bakingTime), ingredients_{}
 {}
 
-std::string Pizza::getName()
+std::string Pizza::getName() const
 {
     return name_;
 }

@@ -21,5 +21,5 @@ public:
         return true;
     }
 
-//    MOCK_METHOD1(waitForDelivery, bool(StartTime));
+    //MOCK_METHOD1(waitForDelivery, bool(StartTime));
 };

@@ -10,7 +10,7 @@ class Pizza
 public:
     Pizza(std::string const & name, double price, minutes bakingTime);
     ~Pizza() = default;             // TODO: Non virtual destructor! Possible memory leaks
-    virtual std::string getName();  // TODO: const correctnest
+    virtual std::string getName() const;
     virtual double getPrice() const;
     virtual minutes getBakingTime() const;
     void addIngreditent(Ingredient ingredient);
