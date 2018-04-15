@@ -38,7 +38,7 @@ bool OrderSystem::makeOrder(Pizzas pizzas, std::string deliveryAddress)
 {
     if (selected_->validateOrder(pizzas))
     {
-        auto price = selected_->calculatePrice(pizzas);
+        auto price = selected_->calculatePrice(pizzas)    ;
         std::cout << "You need to pay " << price << " SEK." << std::endl;
         if (charge(price))
         {

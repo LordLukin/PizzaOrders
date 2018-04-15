@@ -7,5 +7,7 @@ class ITime
 {
 public:
     virtual void wait(minutes) = 0;
+    virtual bool waitForBaking(minutes bakingTime, std::chrono::system_clock::time_point startTime) = 0;
+
     virtual ~ITime() {}
 };

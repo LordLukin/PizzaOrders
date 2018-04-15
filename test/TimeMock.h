@@ -1,5 +1,5 @@
 #pragma once
-#include<gmock/gmock.h>
+#include <gmock/gmock.h>
 #include "ITime.h"
 
 class TimeMock: public ITime
@@ -9,5 +9,10 @@ public:
     {
 
     }
-    virtual ~TimeMock();
+    virtual ~TimeMock() {}
+
+    bool waitForBaking(minutes bakingTime, std::chrono::system_clock::time_point startTime) override
+    {
+        return false;
+    }
 };

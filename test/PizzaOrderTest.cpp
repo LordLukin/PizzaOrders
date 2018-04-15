@@ -1,12 +1,13 @@
 #include <gtest/gtest.h>
 #include "OrderSystem.h"
+#include "TimeMock.h"
 
 using namespace std;
 
 class PizzaOrderTest : public ::testing::Test
 {
 public:
-    OrderSystem os{new Time};
+    OrderSystem os{new TimeMock};
 };
 
 

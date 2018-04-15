@@ -1,10 +1,11 @@
 #include "Pizzeria.h"
 #include <iostream>
 
-Pizzeria::Pizzeria(std::string const & name, Pizzas availablePizzas)
+Pizzeria::Pizzeria(std::string const & name, Pizzas availablePizzas, ITime *time)
     : name_(name)
     , availablePizzas_(availablePizzas)
     , orders_()
+    , time_(time)
 {}
 
 std::string Pizzeria::getName()
@@ -98,10 +99,9 @@ bool Pizzeria::isOrderReady(int orderId)
     {
         if (std::get<0>(order) == orderId)
         {
-            auto now = std::chrono::system_clock::now();
             for (auto pizza : std::get<1>(order))
             {
-                if (pizza->getBakingTime() > (now - std::get<2>(order)))
+                if (time_->waitForBaking(pizza->getBakingTime(), std::get<2>(order)))
                 {
                     return false;
                 }
