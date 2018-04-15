@@ -7,7 +7,8 @@ using namespace std;
 class PizzaOrderTest : public ::testing::Test
 {
 public:
-    OrderSystem os{new TimeMock};
+    TimeMock* tm = new TimeMock();
+    OrderSystem os{tm};
 };
 
 
@@ -25,6 +26,8 @@ TEST_F(PizzaOrderTest, makeOrderInBravo)
 
 TEST_F(PizzaOrderTest, makeOrderWithNotAvailablePizza)
 {
+//    using namespace testing;
+//    EXPECT_CALL(*tm, waitForDelivery(_)).WillOnce(Return(true));
     os.selectPizzeria(BRAVO);
     ASSERT_FALSE(os.makeOrder({new Funghi{100.0}}, "some address"));
 }

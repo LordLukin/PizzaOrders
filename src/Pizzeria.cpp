@@ -1,5 +1,6 @@
 #include "Pizzeria.h"
 #include <iostream>
+#include <numeric>
 
 Pizzeria::Pizzeria(std::string const & name, Pizzas availablePizzas, ITime *time)
     : name_(name)
@@ -51,10 +52,11 @@ double Pizzeria::calculatePrice(Pizzas pizzas)
 {
     // TODO: std::accumulate
     double sum = 0.0;
-    for (const auto & pizza : pizzas)
-    {
-        sum += pizza->getPrice();
-    }
+    sum=std::accumulate(pizzas.begin(),pizzas.end(),0.0,[](double previousSum, Pizza *pizza){return previousSum + pizza->getPrice();});
+    //for (const auto & pizza : pizzas)
+    //{
+    //    sum += pizza->getPrice();
+    //}
     return sum;
 }
 
