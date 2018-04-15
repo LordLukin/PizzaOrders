@@ -2,17 +2,20 @@
 #include "DotPay.h"
 #include "PayPal.h"
 #include "CreditCardSystem.h"
+
 #include <iostream>
 #include <iomanip>
 #include <thread>
+#include <Time.h>
 
-OrderSystem & OrderSystem::instance()
+OrderSystem::OrderSystem()
 {
-    if (!instance_)
-    {
-        instance_ = new OrderSystem{};
-    }
-    return *instance_;
+   time = new Time();
+}
+
+OrderSystem::~OrderSystem()
+{
+    delete time;
 }
 
 void OrderSystem::selectPizzeria(Pizzerias p)
@@ -57,7 +60,9 @@ bool OrderSystem::makeOrder(Pizzas pizzas, std::string deliveryAddress)
                 isOrderReady = selected_->isOrderReady(orderId);
                 std::cout << "Order is not ready yet. Wait for the orderId " << orderId
                           << " to finish" << std::endl;
-                std::this_thread::sleep_for(minutes(2));
+                time -> wait(minutes(2));
+
+
             } while (!isOrderReady);
 
             std::cout << "Your order with id " << orderId << " is ready" << std::endl;
@@ -180,5 +185,3 @@ bool OrderSystem::charge(double price)
     }
     return false;
 }
-
-OrderSystem* OrderSystem::instance_ = nullptr;

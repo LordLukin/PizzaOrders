@@ -3,8 +3,7 @@
 #include <set>
 #include <chrono>
 #include "Ingredient.h"
-
-using minutes = std::chrono::seconds;   // To simulate time flow ;)
+#include "ITime.h"
 
 class Pizza
 {

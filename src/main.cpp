@@ -6,7 +6,7 @@
 
 int main()
 {
-    OrderSystem& os = OrderSystem::instance();
+    OrderSystem os{};
 
     os.selectPizzeria(GRINDTORP);
     os.selectPaymentMethod(CASH);

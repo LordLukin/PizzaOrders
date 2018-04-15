@@ -40,6 +40,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(PizzaOrders)
 
 set(SRC_LIST
+    src/Time.cpp
     src/Funghi.cpp
     src/Ingredient.cpp
     src/Margherita.cpp

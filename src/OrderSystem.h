@@ -3,6 +3,8 @@
 #include "Pizza.h"
 #include "Margherita.h"
 #include "Funghi.h"
+#include "ITime.h"
+#include "Time.h"
 
 enum Pizzerias
 {
@@ -22,10 +24,12 @@ enum PaymentMethod    // TODO: Enum class is safer
 class OrderSystem   // TODO: God class
 {
 public:
-    static OrderSystem& instance();
+    OrderSystem();
+    ~OrderSystem();
 
     OrderSystem(OrderSystem const &) = delete;
     OrderSystem& operator=(OrderSystem const &) = delete;
+
 
     bool makeOrder(Pizzas pizzas, std::string deliveryAddress);
     void selectPizzeria(Pizzerias p);
@@ -33,11 +37,7 @@ public:
     void selectPaymentMethod(PaymentMethod pm);
 
 private:
-    ~OrderSystem() = default;
-    OrderSystem() = default;
-
-
-    static OrderSystem* instance_;
+    ITime *time;
     Pizzeria* selected_;  // TODO: not initialized
     int paymentMethod_;   // TODO: not initialized
 
