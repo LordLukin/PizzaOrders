@@ -6,7 +6,7 @@
 
 int main()
 {
-    OrderSystem os{};
+    OrderSystem os{new Time()};
 
     os.selectPizzeria(GRINDTORP);
     os.selectPaymentMethod(CASH);

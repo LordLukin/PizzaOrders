@@ -8,9 +8,9 @@
 #include <thread>
 #include <Time.h>
 
-OrderSystem::OrderSystem()
+OrderSystem::OrderSystem(ITime *t) : time(t)
 {
-   time = new Time();
+
 }
 
 OrderSystem::~OrderSystem()

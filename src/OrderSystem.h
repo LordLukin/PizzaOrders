@@ -24,7 +24,7 @@ enum PaymentMethod    // TODO: Enum class is safer
 class OrderSystem   // TODO: God class
 {
 public:
-    OrderSystem();
+    OrderSystem(ITime *t);
     ~OrderSystem();
 
     OrderSystem(OrderSystem const &) = delete;
