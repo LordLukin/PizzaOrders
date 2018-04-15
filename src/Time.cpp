@@ -16,3 +16,10 @@ bool Time::waitForBaking(minutes bakingTime, std::chrono::system_clock::time_poi
     return bakingTime < (now - startTime);
 }
 
+bool Time::waitForDelivery(StartTime startTime)
+{
+    auto now = std::chrono::system_clock::now();
+    return now - startTime > minutes(7);
+
+}
+

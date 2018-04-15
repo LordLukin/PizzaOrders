@@ -83,7 +83,7 @@ bool Pizzeria::checkDeliveryStatus(int deliveryId)
         if (std::get<4>(order) == deliveryId)
         {
             auto now = std::chrono::system_clock::now();
-            if ((now - std::get<2>(order)) > minutes(7))
+            if(time_->waitForDelivery(std::get<2>(order)))
             {
                 return true;
             }

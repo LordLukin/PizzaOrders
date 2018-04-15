@@ -11,8 +11,13 @@ public:
     }
     virtual ~TimeMock() {}
 
-    bool waitForBaking(minutes bakingTime, std::chrono::system_clock::time_point startTime) override
+    bool waitForBaking(minutes bakingTime, StartTime startTime) override
     {
         return false;
+    }
+
+    bool waitForDelivery(StartTime startTime)
+    {
+        return true;
     }
 };
