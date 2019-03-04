@@ -1,14 +1,14 @@
 # PizzaOrders [![Build Status](https://www.travis-ci.org/LordLukin/PizzaOrders.svg?branch=master)](https://www.travis-ci.org/LordLukin/PizzaOrders)
 
-Step 1: Identify as much system vulnerabilities as you can (~15 minutes)
-Step 2: Compare your findings with other participants (~10 minutes)
-Step 3: Presentation from STUPID to SOLID code.
-Step 4: Create a common list of problems (~5 minutes)
-Step 5: Plan your work. Assign priority numbers to problems (~15 minutes)
-Step 6: Plan checkpoints every 1-1.5 hour and what should be done by then
-Step 7: Work in a coding-dojo mode. Change every 5-7 minutes.
-Step 8: Stop for a while on checkpoints. Check if you follow the plan. Adjust the plan if necessary.
-Step 9: Finish after 6 hours of coding. It's time for discussion, repetition and the summary of refactoring
+- Step 1: Identify as much system vulnerabilities as you can (~15 minutes)
+- Step 2: Compare your findings with other participants (~10 minutes)
+- Step 3: Presentation from STUPID to SOLID code.
+- Step 4: Create a common list of problems (~5 minutes)
+- Step 5: Plan your work. Assign priority numbers to problems (~15 minutes)
+- Step 6: Plan checkpoints every 1-1.5 hour and what should be done by then
+- Step 7: Work in a coding-dojo mode. Change every 5-7 minutes.
+- Step 8: Stop for a while on checkpoints. Check if you follow the plan. Adjust the plan if necessary.
+- Step 9: Finish after 6 hours of coding. It's time for discussion, repetition and the summary of refactoring
         techniques that you used and if they worked or not.
 
 ### Things to repair:
